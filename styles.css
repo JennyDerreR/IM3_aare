@@ -1,6 +1,7 @@
 
-
-
+*{
+    background-color: #FFFBF4;
+}
 
 
 /* ACHTUNG WIR PROGRAMMIEREN MOBILE FIRST, SONST PASST ES NICHT MEHR ZU MEINEM HTML CODE*/
@@ -32,6 +33,5 @@
 
 
 
-
-
 /*------------------------MEDIA-QUERIES-----------------------------*/
+
