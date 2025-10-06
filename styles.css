@@ -1,13 +1,61 @@
+/* ------------------------------------------------------ Allgemeine/Master Infos ----------------------------------------------------- */
+
+:root{
+    /*-------------------Farben-------------------*/
+    --primary-color: #121726; /*Schrift + Akzente*/
+    --secondary-color: #4097A2; /*Blau 1*/
+    --tertiary-color: #9FC9CB; /*Blau 2*/
+    --background-color: #FFFBF4; /*Hintergrund*/
+
+    /*-------------------Schriftarten-------------------*/
+    --font-primary: 'Ephesis', sans-serif; /*Überschriften*/
+    --font-secondary: 'Crimson Text', serif; /*Fliesstext*/
+}
 
 *{
-    background-color: #FFFBF4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+    /*-------------------Schriftgrössen (NOCH GEGENCHECKEN UND ANPASSEN)-------------------*/
+
+h1 {
+    font-family: var(--font-primary);
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 400;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-family: var(--font-secondary);
+    font-size: 1.5rem; 
+    font-style: normal;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+h3 {
+    font-family: var(--font-primary);
+    font-size: 1.25rem; 
+    font-style: normal;
+    font-weight: 400;
+    color: var(--primary-color);
+}
+
+p {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-style: normal;
+    color: var(--primary-color);
 }
 
 
-/* ACHTUNG WIR PROGRAMMIEREN MOBILE FIRST, SONST PASST ES NICHT MEHR ZU MEINEM HTML CODE*/
-/*MEDIAQUERIES BRAUCHEN EINE MAX WIDTH, keine MIN!!!!!!*/
-
-/* ------------------------------------------------------ Allgemeine/Master Infos ----------------------------------------------------- */
 
 
 
@@ -34,4 +82,61 @@
 
 
 /*------------------------MEDIA-QUERIES-----------------------------*/
+
+/* -----------------------------------------------------------------
+    OVERVIEW:
+    -  Base (phone): default styles (no media query)
+    - Tablet:     min-width: 768px
+    - Small desk: min-width: 1024px
+    - Large desk: min-width: 1440px
+   ----------------------------------------------------------------- */
+
+/* ----------------- Tablet (≥ 768px) ----------------- */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem; /* ~24px */
+    }
+    h3 {
+        font-size: 1.25rem; /* ~20px */
+    }
+    p {
+        font-size: 1.0625rem; /* ~17px */
+    }
+}
+
+/* ----------------- Small desktop (≥ 1024px) ----------------- */
+@media (min-width: 1024px) {
+     h1 {
+        font-size: 2.5rem;
+    }
+    h2 {
+        font-size: 1.75rem; /* ~28px */
+    }
+    h3 {
+        font-size: 1.375rem; /* ~22px */
+    }
+    p {
+        font-size: 1.125rem; /* ~18px */
+    }
+}
+
+/* ----------------- Large desktop (≥ 1440px) ----------------- */
+@media (min-width: 1440px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2rem; /* ~32px */
+    }
+    h3 {
+        font-size: 1.5rem; /* ~24px */
+    }
+    p {
+        font-size: 1.125rem; /* keep paragraph readable */
+    }
+}
+
 
