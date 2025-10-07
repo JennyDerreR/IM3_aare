@@ -93,8 +93,20 @@ header img {
     width: 20%;
     padding: 5px;
     margin: 10px 0px 20px 10px;
-
 }
+
+.welcome {
+    display: flex;
+    position: absolute;
+}
+
+.welcome h1 {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+
 
 /*---------------------------------------------LANDING SECTION (WESTE)------------------------------------------------------*/
 
