@@ -19,20 +19,23 @@ function fetchAareData()
     $url = "https://aareguru.existenz.ch/v2018/widget";
 
     // Initialisiert eine cURL-Sitzung
-    curl_init($url);
+    $ch = curl_init($url);
 
     // Setzt Optionen
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Rückgabe als String
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Rückgabe als String
 
     // Führt die cURL-Sitzung aus und erhält den Inhalt
-    curl_exec($curl);
-
+    $response = curl_exec($ch);
+    echo $response;
+    
     // Schließt die cURL-Sitzung
-    curl_close($curl);
+    curl_close($ch);
 
     // Dekodiert die JSON-Antwort und gibt Daten zurück
     json_decode($response, true);
 }
 
 // Gibt die Daten zurück, wenn dieses Skript eingebunden ist
-return fetchWeatherData();
+return fetchAareData();
+
+

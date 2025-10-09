@@ -17,13 +17,23 @@
 
 // Bindet das Skript extract.php für Rohdaten ein und speichere es in $data
 $data = include('extract.php');
+echo $data;
 
-// Definiert eine Zuordnung von Koordinaten zu Stadtnamen
-$locationsMap = [
-    '46.94,7.44' => 'Bern',
-    '46.84,9.52' => 'Chur',
-    '47.36,8.559999' => 'Zürich',
+// Values mit cities verbinden
+$keylocation = [
+    'brienz' => 'Brienz',
+    'interlaken' => 'Interlake',
+    'thun' => 'Thun',
+    'bern' => 'Bärn',
+    'hagneck' => 'Hagneck',
+    'biel' => 'Biu',
+    'olten' => 'Oute',
+    'brugg' => 'Brugg AG',
 ];
+
+$timestamp = [
+
+]
 
 // Funktion, um Fahrenheit in Celsius umzurechnen
 
@@ -32,10 +42,10 @@ $locationsMap = [
 
 
 // Initialisiert ein Array, um die transformierten Daten zu speichern
-$transformedData = [];
+// $transformedData = [];
 
 // Transformiert und fügt die notwendigen Informationen hinzu
-foreach ($data as $location) {
+// foreach ($data as $location) {
     // Bestimmt den Stadtnamen anhand von Breitengrad und Längengrad
 
     // Wandelt die Temperatur in Celsius um und rundet sie
@@ -43,8 +53,9 @@ foreach ($data as $location) {
     // Bestimmt die Wetterbedingung
 
     // Konstruiert die neue Struktur mit allen angegebenen Feldern, einschließlich des neuen 'condition'-Feldes
-}
+// }
 
 // Kodiert die transformierten Daten in JSON
 
 // Gibt die JSON-Daten zurück, anstatt sie auszugeben
+?>
