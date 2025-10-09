@@ -16,4 +16,15 @@
 
 require_once '../config.php'; // Stellen Sie sicher, dass dies auf Ihre tatsächliche Konfigurationsdatei verweist
 
-header('Content-Type: application/json');
+header('Content-Type: application/json'); //sagt dem Browser, dass die kommenden Daten in JSON dargestellt werden sollen
+
+try {
+   $pdo = new PDO($dsn, $username, $password, $options);
+
+   $sql = "select * from Aare_Jenny_Sara"; // Passen Sie dies an Ihre tatsächliche Tabelle an
+   $stmt = $pdo -> prepare ($sql);
+   $stmt -> execute();
+   $results = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+   echo json_encode($results, JSON_PRETTY_PRINT);
+}

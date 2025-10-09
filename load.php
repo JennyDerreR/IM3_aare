@@ -1,4 +1,7 @@
 <?php
+
+include('transform.php');
+print_r($transformedData);
 /* ============================================================================
    HANDLUNGSANWEISUNG (load.php)
    1) Binde 001_config.php (PDO-Config) ein.
@@ -12,17 +15,17 @@
    9) Bei Fehlern: Exception fangen → generische Fehlermeldung/Code (kein Stacktrace).
   10) Keine Debug-Ausgaben in Produktion; sensible Daten nicht loggen.
    ============================================================================ */
-
+echo "Lade Daten...\n";
 
 // Transformations-Skript  als 'transform.php' einbinden
-
+include('transform.php');
 // Dekodiere die JSON-Daten zu einem Array
-
+require_once '../config.php';
 // Binde die Datenbankkonfiguration ein
 
 try {
     // Erstellt eine neue PDO-Instanz mit der Konfiguration aus config.php
-
+    $pdo = new PDO($dsn, $username, $password, $options);
 
     // SQL-Query mit Platzhaltern für das Einfügen von Daten
     $sql = "";

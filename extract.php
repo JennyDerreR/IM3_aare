@@ -14,28 +14,27 @@
   10) Fehlerfälle: Exception/Fehlerobjekt nach oben reichen (kein HTML ausgeben).
    ============================================================================ */
 
-function fetchAareData()
-{
-    $url = "https://aareguru.existenz.ch/v2018/widget";
 
-    // Initialisiert eine cURL-Sitzung
-    $ch = curl_init($url);
+$url = "https://aareguru.existenz.ch/v2018/widget";
 
-    // Setzt Optionen
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Rückgabe als String
+// Initialisiert eine cURL-Sitzung
+$ch = curl_init($url);
 
-    // Führt die cURL-Sitzung aus und erhält den Inhalt
-    $response = curl_exec($ch);
-    echo $response;
-    
-    // Schließt die cURL-Sitzung
-    curl_close($ch);
+// Setzt Optionen
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Rückgabe als String
 
-    // Dekodiert die JSON-Antwort und gibt Daten zurück
-    json_decode($response, true);
-}
+// Führt die cURL-Sitzung aus und erhält den Inhalt
+$response = curl_exec($ch);
 
-// Gibt die Daten zurück, wenn dieses Skript eingebunden ist
-return fetchAareData();
+// print_r($response);
+
+// Schließt die cURL-Sitzung
+curl_close($ch);
+
+// Dekodiert die JSON-Antwort und gibt Daten zurück
+$data = json_decode($response, true);
+
+// echo "<br><br>";
+// print_r($data);
 
 

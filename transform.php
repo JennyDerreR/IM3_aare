@@ -1,5 +1,4 @@
 <?php
-
 /* ============================================================================
    HANDLUNGSANWEISUNG (transform.php)
    0) Schau dir die Rohdaten genau an und plane exakt, wie du die Daten umwandeln möchtest (auf Papier)
@@ -16,44 +15,36 @@
    ============================================================================ */
 
 // Bindet das Skript extract.php für Rohdaten ein und speichere es in $data
-$data = include('extract.php');
-echo $data;
+include('extract.php');
 
-// Values mit cities verbinden
-$keylocation = [
-    'brienz' => 'Brienz',
-    'interlaken' => 'Interlake',
-    'thun' => 'Thun',
-    'bern' => 'Bärn',
-    'hagneck' => 'Hagneck',
-    'biel' => 'Biu',
-    'olten' => 'Oute',
-    'brugg' => 'Brugg AG',
-];
+// print_r($data); // Zum Debuggen: Ausgabe des Rohdaten-Arrays
+$locations_data = $data['values'] ?? [];
 
-$timestamp = [
 
-]
-
-// Funktion, um Fahrenheit in Celsius umzurechnen
-
-// Neue Funktion zur Bestimmung der Wetterbedingung
+// echo "Jasper";
 
 
 
-// Initialisiert ein Array, um die transformierten Daten zu speichern
-// $transformedData = [];
+$transformedData = []; // Array zum Speichern der transformierten Daten
 
-// Transformiert und fügt die notwendigen Informationen hinzu
-// foreach ($data as $location) {
-    // Bestimmt den Stadtnamen anhand von Breitengrad und Längengrad
+foreach ($locations_data as $location_key => $location_info) {
+        
+    // Assoziatives Array "transformedData" erstellen
+    $transformedData[] = [
+        'Temp_H20'    => $location_info['temperature'] ?? null,
+        'temp_text'   => $location_info['temperature_text'] ?? null,
+        'flow'        => $location_info['flow'] ?? null,
+        'flow_text'   => $location_info['flow_text'] ?? null,
+        'tt_Luft'     => $location_info['tt'] ?? null,
+        // Hier wird der Objektname (z.B. "brienz") als String für die Spalte location_id verwendet
+        'location_id' => $location_key 
+    ];
+}
 
-    // Wandelt die Temperatur in Celsius um und rundet sie
 
-    // Bestimmt die Wetterbedingung
-
-    // Konstruiert die neue Struktur mit allen angegebenen Feldern, einschließlich des neuen 'condition'-Feldes
-// }
+// print_r($data); // Zum Debuggen: Ausgabe des transformierten Arrays
+// echo "<br><br>";
+// print_r($transformedData); // Zum Debuggen: Ausgabe des transformierten Arrays
 
 // Kodiert die transformierten Daten in JSON
 
