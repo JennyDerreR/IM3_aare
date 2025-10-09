@@ -6,7 +6,7 @@ $host     = '979g66.myd.infomaniak.com';     // Hostserver, auf dem die DB läuf
 
 $dbname   = '979g66_IM_Aare';   // Name der Datenbank
 $username = '979g66_Sara';   // Benutzername für die DB
-$password = 'Fb9h?90_?h~WF';   // Passwort für die DB
+$password = 'Inf0man!@k2025';   // Passwort für die DB
 
 
 // DSN (Datenquellenname) für PDO

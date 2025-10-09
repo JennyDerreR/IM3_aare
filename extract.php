@@ -14,24 +14,24 @@
   10) Fehlerfälle: Exception/Fehlerobjekt nach oben reichen (kein HTML ausgeben).
    ============================================================================ */
 
-function fetchWeatherData()
+function fetchAareData()
 {
     $url = "https://aareguru.existenz.ch/v2018/widget";
 
     // Initialisiert eine cURL-Sitzung
-
+    curl_init($url);
 
     // Setzt Optionen
-
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); // Rückgabe als String
 
     // Führt die cURL-Sitzung aus und erhält den Inhalt
-
+    curl_exec($curl);
 
     // Schließt die cURL-Sitzung
-
+    curl_close($curl);
 
     // Dekodiert die JSON-Antwort und gibt Daten zurück
-
+    json_decode($response, true);
 }
 
 // Gibt die Daten zurück, wenn dieses Skript eingebunden ist
