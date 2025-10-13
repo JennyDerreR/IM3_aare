@@ -1,7 +1,4 @@
-<?php
 
-include('transform.php');
-print_r($transformedData);
 /* ============================================================================
    HANDLUNGSANWEISUNG (load.php)
    1) Binde 001_config.php (PDO-Config) ein.
@@ -19,6 +16,7 @@ echo "Lade Daten...\n";
 
 // Transformations-Skript  als 'transform.php' einbinden
 include('transform.php');
+print_r($transformedData);
 // Dekodiere die JSON-Daten zu einem Array
 require_once '../config.php';
 // Binde die Datenbankkonfiguration ein

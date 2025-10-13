@@ -26,15 +26,29 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Rückgabe als String
 // Führt die cURL-Sitzung aus und erhält den Inhalt
 $response = curl_exec($ch);
 
+// Prüft auf Fehler
+if ($response === false) {
+    echo "cURL-Fehler: " . curl_error($ch);
+}
+
+// Prüft den HTTP-Statuscode
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+if ($httpCode !== 200) {
+    die("Fehler: Server antwortete mit HTTP-Code $httpCode");
+}
 // print_r($response);
 
 // Schließt die cURL-Sitzung
-curl_close($ch);
+// curl_close($ch);
 
 // Dekodiert die JSON-Antwort und gibt Daten zurück
 $data = json_decode($response, true);
 
 // echo "<br><br>";
 // print_r($data);
+
+
 
 
