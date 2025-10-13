@@ -1,41 +1,36 @@
-
-/* ============================================================================
-   HANDLUNGSANWEISUNG (load.php)
-   1) Binde 001_config.php (PDO-Config) ein.
-   2) Binde transform.php ein → erhalte TRANSFORM-JSON.
-   3) json_decode(..., true) → Array mit Datensätzen.
-   4) Stelle PDO-Verbindung her (ERRMODE_EXCEPTION, FETCH_ASSOC).
-   5) Bereite INSERT/UPSERT-Statement mit Platzhaltern vor.
-   6) Iteriere über Datensätze und führe execute(...) je Zeile aus.
-   7) Optional: Transaktion verwenden (beginTransaction/commit) für Performance.
-   8) Bei Erfolg: knappe Bestätigung ausgeben (oder still bleiben, je nach Kontext).
-   9) Bei Fehlern: Exception fangen → generische Fehlermeldung/Code (kein Stacktrace).
-  10) Keine Debug-Ausgaben in Produktion; sensible Daten nicht loggen.
-   ============================================================================ */
-echo "Lade Daten...\n";
-
-// Transformations-Skript  als 'transform.php' einbinden
-include('transform.php');
-print_r($transformedData);
-// Dekodiere die JSON-Daten zu einem Array
-require_once '../config.php';
-// Binde die Datenbankkonfiguration ein
+<?php
+require_once 'config.php';  // DB-Verbindungsdaten laden
+include('transform.php');   // erzeugt $transformedData aus der Aare Guru API
 
 try {
-    // Erstellt eine neue PDO-Instanz mit der Konfiguration aus config.php
+    // Verbindung zur Datenbank herstellen
     $pdo = new PDO($dsn, $username, $password, $options);
 
-    // SQL-Query mit Platzhaltern für das Einfügen von Daten
-    $sql = "";
+    // SQL-Statement vorbereiten: Timestamp wird von der DB automatisch gesetzt!
+    $sql = "INSERT INTO Aare_Jenny_Sara 
+            (location_id, flow, flow_text, tt_Luft, Temp_H20, temp_text) 
+            VALUES (?, ?, ?, ?, ?, ?)";
 
-    // Bereitet die SQL-Anweisung vor
     $stmt = $pdo->prepare($sql);
 
-    // Fügt jedes Element im Array in die Datenbank ein
-    foreach ($dataArray as $item) {
+    
+    // Alle Standorte aus transform.php durchlaufen und einzeln einfügen
+    foreach ($transformedData as $row) {
+        echo "Füge ein: " . print_r($row, true) . "<br>";
+        // Stelle sicher, dass fehlende Werte auf NULL gesetzt werden
+        $stmt->execute([
+            $row['location_id'] ?? 0,
+            $row['flow'] ?? 0,
+            $row['flow_text'] ?? '',
+            $row['tt_Luft'] ?? 0,
+            $row['Temp_H20'] ?? 0,
+            $row['temp_text'] ?? ''
+        ]);
     }
 
-    echo "Daten erfolgreich eingefügt.";
+    echo "✅ Daten aus der Aare Guru API wurden erfolgreich in die Tabelle 'Aare_Jenny_Sara' eingefügt.";
+
 } catch (PDOException $e) {
-    die("Verbindung zur Datenbank konnte nicht hergestellt werden: " . $e->getMessage());
+    die("❌ Datenbankfehler: " . $e->getMessage());
 }
+?>
