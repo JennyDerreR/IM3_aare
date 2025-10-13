@@ -120,16 +120,48 @@ header img {
 
 /* Canvas-Container für responsives Verhalten */
 .diagramm {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
-canvas#diagramm {
-  width: 100% !important;
-  height: auto !important;
+/*---Diagramm-Wellenstyling für Background---*/
+
+/*Wellen-Container styling*/
+.diagramm .waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
 }
+
+/*Jede Welle*/
+.diagramm .wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    display: block;
+}
+
+/* Layer-Reihenfolge */
+.wave1 { z-index: 3; top: 0; }     /* hellste oben */
+.wave2 { z-index: 2; top: 30%; }   /* mittlere */
+.wave3 { z-index: 1; top: 60%; }   /* dunkelste unten */
+
+canvas#diagramm {
+    position: relative;
+    z-index: 10; /* Über den Wellen */
+    width: 100% !important;
+    height: auto !important;
+}
+
+/*Pop-Up Styling*/
+
 
 /*--------------------------------------------TRANSPARENZ-HINWEIS (Falls nötig)-----------------------------------------------*/
 
@@ -191,7 +223,19 @@ footer {
     }
     :root {
         --boat-size: 40; /*Grösse für Desktop klein*/
-    };
+    }
+    .wave.mobile { 
+        display: none; 
+    }
+    .wave.desktop { 
+        display: block; 
+    }
+
+    /* SVG Skalierung für alle Wellen */
+    .diagramm .wave svg {
+        width: 100%;
+        height: auto;
+    }
 }
 
 /* ----------------- Large desktop (≥ 1440px) ----------------- */
@@ -210,7 +254,19 @@ footer {
     }
     :root {
         --boat-size: 50; /*Grösse für Desktop gross*/
-    };
+    }
+    .wave.mobile { 
+        display: none; 
+    }
+    .wave.desktop { 
+        display: block; 
+    }
+    
+    /* SVG Skalierung für alle Wellen */
+    .diagramm .wave svg {
+        width: 100%;
+        height: auto;
+    }
 }
 
 
