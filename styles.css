@@ -113,6 +113,23 @@ header img {
 
 /*--------------------------------------------DIAGRAMM-------------------------------------------------------------------------*/
 
+/*Bootgrösse für Diagramm (Chart.js Punkte)*/
+:root {
+    --boat-size: 20; /*Standardgrösse für Mobile*/
+}
+
+/* Canvas-Container für responsives Verhalten */
+.diagramm {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+canvas#diagramm {
+  width: 100% !important;
+  height: auto !important;
+}
 
 /*--------------------------------------------TRANSPARENZ-HINWEIS (Falls nötig)-----------------------------------------------*/
 
@@ -153,6 +170,9 @@ footer {
     p {
         font-size: 1.0625rem; /* ~17px */
     }
+    :root {
+        --boat-size: 30; /*Grösse für Tablet*/
+    };
 }
 
 /* ----------------- Small desktop (≥ 1024px) ----------------- */
@@ -169,6 +189,9 @@ footer {
     p {
         font-size: 1.125rem; /* ~18px */
     }
+    :root {
+        --boat-size: 40; /*Grösse für Desktop klein*/
+    };
 }
 
 /* ----------------- Large desktop (≥ 1440px) ----------------- */
@@ -185,6 +208,9 @@ footer {
     p {
         font-size: 1.125rem; /* keep paragraph readable */
     }
+    :root {
+        --boat-size: 50; /*Grösse für Desktop gross*/
+    };
 }
 
 
