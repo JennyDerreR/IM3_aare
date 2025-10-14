@@ -213,10 +213,18 @@ header img {
 /*Jede Welle*/
 .diagramm .wave {
     position: absolute;
+    bottom: 0;
     left: 0;
     width: 100%;
     margin: 0 auto;
     padding: 16px;
+}
+
+.wave.desktop svg,
+.wave.mobile svg {
+    width: 100%; /*(SVG breiter als Container für Animation?)*/
+    height: auto;
+}
 
 /* Layer-Reihenfolge */
 .wave1 { 
@@ -226,7 +234,7 @@ header img {
     z-index: 2; top: 30%; 
 }   /* mittlere */
 .wave3 { 
-    z-index: 3; top: 60%; 
+    z-index: 3; top: 50%; 
 }   /* dunkelste unten */
 
 canvas#diagramm {
@@ -318,11 +326,17 @@ footer {
 
 /* -----------------------------------------------------------------
     OVERVIEW:
-    -  Base (phone): default styles (no media query)
+    - Base (phone): default styles (no media query)
     - Tablet:     min-width: 768px
     - Small desk: min-width: 1024px
     - Large desk: min-width: 1440px
    ----------------------------------------------------------------- */
+/* ----------------- Base (phone) (weil sonst nicht geht, lol----------------- */
+@media (min-width:0px) {
+    #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
+        display: none; 
+    }
+}
 
 /* ----------------- Tablet (≥ 768px) ----------------- */
 @media (min-width: 768px) {
@@ -341,6 +355,9 @@ footer {
     :root {
         --boat-size: 30; /*Grösse für Tablet*/
     };
+    #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
+        display: none; 
+    }
 }
 
 /* ----------------- Small desktop (≥ 1024px) ----------------- */
@@ -360,11 +377,12 @@ footer {
     :root {
         --boat-size: 40; /*Grösse für Desktop klein*/
     }
-    .wave.mobile { 
-        display: none; 
+    #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop {
+        display: block;
     }
-    .wave.desktop { 
-        display: block; 
+
+    #waveDarkMobile, #waveMediumMobile, #waveBrightMobile { 
+        display: none; 
     }
 
     /* SVG Skalierung für alle Wellen */
@@ -391,18 +409,16 @@ footer {
     :root {
         --boat-size: 50; /*Grösse für Desktop gross*/
     }
-    .wave.mobile { 
+    #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop {
+        display: block;
+    }
+    #waveDarkMobile, #waveMediumMobile, #waveBrightMobile { 
         display: none; 
     }
-    .wave.desktop { 
-        display: block; 
-    }
-    
+
     /* SVG Skalierung für alle Wellen */
     .diagramm .wave svg {
         width: 100%;
         height: auto;
     }
-}
-
 }

@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'unload.php'; // Pfad zu deinem PHP-Skript
 
     const citiesOrder = [
-        "Brienz", "Interlaken", "Thun", "Bern",
-        "Hagneck", "Biel", "Olten", "Brugg"
+        "brienz", "interlaken", "thun", "bern",
+        "hagneck", "biel", "olten", "brugg"
     ];
 
     fetch(apiUrl)
@@ -24,138 +24,86 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!latestPerCity[city]) latestPerCity[city] = item;
             });
 
-            const sortedCityData = citiesOrder
-                .map(city => latestPerCity[city])
-                .filter(item => item !== undefined);
+            console.log("Letzte Messwerte pro Stadt:", latestPerCity);
 
-            // Array für Chart
-            const scatterData = sortedCityData.map(item => ({
-                x: item.location_id,
-                y: parseFloat(item.flow)
-            }));
+            let sortedCityNames = [];
+            let sortedFlowValues = [];
 
-            // Durchschnitt berechnen (auf Basis aller historischen Werte)
-            const avgFlowPerCity = {};
-            data.forEach(item => {
-                const city = item.location_id;
-                if (!avgFlowPerCity[city]) avgFlowPerCity[city] = [];
-                avgFlowPerCity[city].push(parseFloat(item.flow));
-            });
+            for (const stadt of citiesOrder) {
+                if (latestPerCity[stadt]) {
+                    sortedCityNames.push(stadt);
+                    sortedFlowValues.push(parseFloat(latestPerCity[stadt].flow));
+                }
+            }
 
-            Object.keys(avgFlowPerCity).forEach(city => {
-                const values = avgFlowPerCity[city];
-                const avg = values.reduce((a, b) => a + b, 0) / values.length;
-                avgFlowPerCity[city] = avg.toFixed(1);
-            });
+            console.log("Sortierte Stadtnamen:", sortedCityNames);
+            console.log("Sortierte Strömungswerte:", sortedFlowValues);
 
-            // Boot-Icon
-            const boatImg = new Image();
-            boatImg.src = 'pics/Boot.png';
+            let xAchse = sortedCityNames;
+            let yAchse = sortedFlowValues;
 
-            const boatSize = parseInt(
-                getComputedStyle(document.documentElement).getPropertyValue('--boat-size')
-            ) || 20;
+            // Funktion, um Messwerte in Prozent zu transformieren
+            // (hier Beispielmapping: 125 → 0.25, 200 → 0.5, 245 → 0.75)
+            function mapFlowToPercent(flow) {
+                if (flow <= 0) return 0;
+                if (flow <= 125) return 0.25;
+                if (flow >= 245) return 0.75;
 
-            const ctx = document.getElementById('diagramm').getContext('2d');
+                // Linear zwischen 125 (0.25) und 245 (0.75)
+                return 0.25 + ((flow - 125) / (245 - 125)) * (0.75 - 0.25);
+            }
 
-            const chart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Strömung',
-                        data: scatterData,
-                        pointStyle: boatImg,
-                        pointRadius: boatSize,
-                    }]
+            // Messwerte umrechnen
+            let yAchseProzent = yAchse.map(mapFlowToPercent);
+
+            let MyChart = document.getElementById('diagramm').getContext('2d');
+                new Chart(MyChart, {
+                    type: "line",
+                    data: {
+                    labels: xAchse, 
+                    datasets: [
+                        {
+                            data: yAchseProzent,
+                            label: "Strömung"
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: (context) => `${context.raw.x}: ${context.raw.y} m³/s`
+                    scales: {
+                        y: {
+                            min: 0,    // Unterer Punkt der Achse
+                            max: 1,    // Oberer Punkt der Achse
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    // Hier kannst du die Labels genau definieren
+                                    if (value === 0) return "0 m³/s";
+                                    if (value === 0.25) return "125 m³/s";
+                                    if (value === 0.5) return "200 m³/s";
+                                    if (value === 0.75) return "245 m³/s";
+                                    // return "";
+                                },
+                                stepSize: 0.25
+                            }
+                        },
+                            x: {
+                                ticks: {
+                                    autoSkip: false
+                                }
+                            }
+                        },
+                         plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        // Tooltip zeigt den echten Messwert an
+                                        return `${yAchse[context.dataIndex]} m³/s`;
+                                    }
+                                }
                             }
                         }
-                    },
-                    scales: {
-                        x: {
-                            type: 'category',
-                            labels: citiesOrder,
-                            grid: { display: false },
-                            ticks: { display: false }
-                        },
-                        y: {
-                            min: 10,
-                            max: 400,
-                            ticks: {
-                                display: true,
-                                stepSize: 50,
-                                callback: (value) => [125, 200, 245].includes(value) ? `${value} m³/s` : ''
-                            },
-                            grid: { display: false }
-                        }
-                    },
-                    onClick: (evt, elements) => {
-                        if (elements.length > 0) {
-                            const index = elements[0].index;
-                            const cityData = sortedCityData[index];
-                            showCityPopup(cityData);
-                        }
                     }
-                },
-                plugins: [{
-                    id: 'cityLabels',
-                    afterDatasetsDraw(chart) {
-                        const { ctx } = chart;
-                        ctx.save();
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'top';
-                        ctx.fillStyle =
-                            getComputedStyle(document.documentElement).getPropertyValue('--primary-color') || '#000';
-                        ctx.font =
-                            getComputedStyle(document.body).getPropertyValue('--font-secondary') || '16px sans-serif';
-
-                        const meta = chart.getDatasetMeta(0);
-                        meta.data.forEach((point, i) => {
-                            const city = citiesOrder[i];
-                            ctx.fillText(city, point.x, point.y + boatSize + 10);
-                        });
-                        ctx.restore();
-                    }
-                }]
             });
-
-            // Popup-Funktion
-            function showCityPopup(cityData) {
-                const overlay = document.getElementById('popup-overlay');
-                overlay.classList.remove('hidden');
-
-                // Fülle Daten
-                document.getElementById('popup-city').textContent = cityData.location_id;
-                document.getElementById('popup-water').textContent = cityData.Temp_H20 || '-';
-                document.getElementById('popup-water-text').textContent = cityData.temp_text || '';
-                document.getElementById('popup-air').textContent = cityData.tt_Luft || '-';
-                document.getElementById('popup-flow').textContent = cityData.flow || '-';
-                document.getElementById('popup-flow-text').textContent = cityData.flow_text || '';
-
-                const avg = avgFlowPerCity[cityData.location_id] || '-';
-                document.getElementById('popup-average').textContent = avg;
-
-                // Schließen
-                document.getElementById('popup-close').onclick = () => {
-                    overlay.classList.add('hidden');
-                };
-
-                // Schließen bei Klick außerhalb
-                overlay.onclick = (e) => {
-                    if (e.target === overlay) overlay.classList.add('hidden');
-                };
-            }
-
-            // Global speichern, falls später gebraucht
-            window.allCityData = data;
-
         })
-        .catch(err => console.error('Fehler beim Laden der Daten:', err));
-});
+})
+
