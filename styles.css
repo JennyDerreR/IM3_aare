@@ -22,7 +22,7 @@ body {
     background-color: var(--background-color);
 
    /* ---- Fallback stops (work everywhere) ---- */
-  --grad-1: rgba(64,151,162,0.30);  /* visibility can be adjusted */
+  --grad-1: rgba(64,151,162,0.30);  /* visibility can be adjusted - FARBEN UND PUNKTE AM ENDE ANPASSEN!!!! */
   --grad-2: rgba(159,201,203,0.16);
   --grad-3: rgba(18,23,38,0.10);
   --grad-4: rgba(64,151,162,0.14);
@@ -49,6 +49,19 @@ body {
 
 }
 
+/* Prevent any horizontal page scrolling */
+html, body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none; /* prevents swipe/overscroll horizontally on supporting browsers */
+}
+
+/* Optional safety: ensure images/SVGs don't push page wider than viewport */
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
     /*-------------------Schriftgrössen (NOCH GEGENCHECKEN UND ANPASSEN)-------------------*/
 
 h1 {
@@ -69,7 +82,7 @@ h2 {
 
 h3 {
     font-family: var(--font-primary);
-    font-size: 1.75rem; 
+    font-size: 1.8rem; 
     font-style: normal;
     font-weight: 400;
     color: var(--primary-color);
@@ -87,6 +100,7 @@ header {
     display: flex;
     max-height: 110px;
     align-items: center;
+     z-index: 0;
 }
 
 
@@ -95,6 +109,7 @@ header img {
     width: 17%;
     padding: 5px;
     margin: 10px 0px 20px 10px;
+     z-index: 0;
 }
 
 /*---------------------------------------------LANDING SECTION (WESTE)------------------------------------------------------*/
@@ -106,19 +121,19 @@ header img {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    position: relative;    /* contain absolutely positioned swimmwest */
-    min-height: 240px; 
-    transform: translateY(-15%);    /* give it room so the background svg is visible */
+    margin: 20px 20px 20px 20px;
+    min-height: 340px; 
+    transform: translateY(-15%);
+    z-index: 1;    /* give it room so the background svg is visible */
+    position: relative;
+    overflow-x: hidden;   /* only horizontal is clipped */
+    overflow-y: visible;  /* keep top/bottom visible */
 }
 
 .title {
     z-index: 2;            /* sit above the background svg */
     position: relative;
-    width: 140%;
+    max-width: 100%;
     display: block;
     text-align: center;
     margin-bottom: 20px;
@@ -129,12 +144,10 @@ header img {
 }
 
 .swimmwest img{
-    position: absolute;
-    transform: translate(-49%, -110%) scale(3); /* center and scale */
-    opacity: 0.95;          
-    z-index: 1;            /* sit behind the text */
-    margin-bottom: 20px;
-    overflow: hidden;
+  position: absolute;
+  transform: translate(-49%, -110%) scale(3);
+  opacity: 0.95;
+  z-index: 1;
 }
 
 /* Tagline with waves left and right */
@@ -161,26 +174,25 @@ header img {
 /*----------------------------------------------------- KARTE -------------------------------------------------------*/
 
 .map {
-    margin: 60px 5px 20px 5px;
-    
+    max-height: 500px;
 }
-
 .map h3 {
-   margin-top: 20px;
    margin-left: 15px;
    margin-bottom: 20px;
    padding: 5px;
 }
 
 .map img {
-    width: 120%;
-    height: auto;
-    overflow: hidden;
-    display: block;
-    align-items: center;
-    margin: 0 auto; /* Center the image */
-    
+    display: block;            
+    object-fit: cover;         /* crop/zoom while preserving aspect */
+    object-position: center;   /* focus center (change to top/left as needed) */
+    transform: scale(1.09) translateY(-25%); /* tiny zoom + keep your vertical offset */
+    transform-origin: center center;
+    max-width: 100%;        /* prevents huge vertical overflow on small screens */
 }
+
+
+
 /*--------------------------------------------DIAGRAMM-------------------------------------------------------------------------*/
 
 /*Bootgrösse für Diagramm (Chart.js Punkte)*/
