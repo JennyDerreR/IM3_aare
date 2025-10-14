@@ -14,17 +14,24 @@
    ============================================================================ */
 
 
-require_once '../config.php'; // Stellen Sie sicher, dass dies auf Ihre tatsächliche Konfigurationsdatei verweist
+require_once 'config.php'; // Stellen Sie sicher, dass dies auf Ihre tatsächliche Konfigurationsdatei verweist
 
-header('Content-Type: application/json'); //sagt dem Browser, dass die kommenden Daten in JSON dargestellt werden sollen
+header('Content-Type: application/json; charset=utf-8'); //sagt dem Browser, dass die kommenden Daten in JSON dargestellt werden sollen
 
 try {
    $pdo = new PDO($dsn, $username, $password, $options);
 
-   $sql = "select * from Aare_Jenny_Sara"; // Passen Sie dies an Ihre tatsächliche Tabelle an
+   $sql = "SELECT * FROM Aare_Jenny_Sara ORDER BY Timestamp DESC";
    $stmt = $pdo -> prepare ($sql);
    $stmt -> execute();
    $results = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
    echo json_encode($results, JSON_PRETTY_PRINT);
+}
+
+catch (PDOException $e) {
+   http_response_code(500);
+   echo json_encode(['error' => 'Datenbankfehler.']);
+   // In einer Produktionsumgebung sollten Sie keine internen Fehlerdetails preisgeben
+   // error_log($e->getMessage()); // Loggen Sie den Fehler für die Entwickler
 }
