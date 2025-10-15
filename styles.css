@@ -22,30 +22,31 @@ body {
     background-color: var(--background-color);
 
    /* ---- Fallback stops (work everywhere) ---- */
-  --grad-1: rgba(64,151,162,0.30);  /* visibility can be adjusted - FARBEN UND PUNKTE AM ENDE ANPASSEN!!!! */
-  --grad-2: rgba(159,201,203,0.16);
-  --grad-3: rgba(18,23,38,0.10);
-  --grad-4: rgba(64,151,162,0.14);
-  --grad-5: rgba(159,201,203,0.10);
+    --grad-1: rgba(64,151,162,0.5);   /* 50% opacity */
+    --grad-2: rgba(255,251,244,1);    /* 100% opacity */
+    --grad-3: rgba(255,251,244,1);    /* 100% opacity */
+    --grad-4: rgba(159,201,203,0.6); /* 75% opacity */
+    --grad-5: rgba(64,151,162,0.6);   /* 60% opacity */
 
-  --grad-1-pos: 0%;
-  --grad-2-pos: 25%;
-  --grad-3-pos: 50%;
-  --grad-4-pos: 75%;
-  --grad-5-pos: 100%;
+    --grad-1-pos: 16.5%;
+    --grad-2-pos: 18.5%;
+    --grad-3-pos: 52.5%;
+    --grad-4-pos: 58%;
+    --grad-5-pos: 90%;
 
     /* paint the gradient across the page using your --grad-* variables */
-    background-image: linear-gradient(180deg,
-        var(--grad-1) var(--grad-1-pos),
-        var(--grad-2) var(--grad-2-pos),
-        var(--grad-3) var(--grad-3-pos),
-        var(--grad-4) var(--grad-4-pos),
-        var(--grad-5) var(--grad-5-pos)
+    background-image: linear-gradient(
+    180deg,
+    var(--grad-1) var(--grad-1-pos),
+    var(--grad-2) var(--grad-2-pos),
+    var(--grad-3) var(--grad-3-pos),
+    var(--grad-4) var(--grad-4-pos),
+    var(--grad-5) var(--grad-5-pos)
     );
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: center;
-    background-size: cover;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
 
 }
 
@@ -103,13 +104,12 @@ header {
      z-index: 0;
 }
 
-
 header img {    
     height: 17%;
     width: 17%;
     padding: 5px;
     margin: 10px 0px 20px 10px;
-     z-index: 0;
+    z-index: 0;
 }
 
 /*---------------------------------------------LANDING SECTION (WESTE)------------------------------------------------------*/
@@ -178,7 +178,7 @@ header img {
 }
 .map h3 {
    margin-left: 15px;
-   margin-bottom: 20px;
+   margin-bottom: 10px;
    padding: 5px;
 }
 
@@ -195,7 +195,7 @@ header img {
 
 .diagrammTitle h3 {
    margin-left: 15px;
-   margin-bottom: 20px;
+   margin-bottom: 10px;
    margin-top: -60px;
    padding: 5px;
 }
@@ -327,7 +327,13 @@ canvas#diagramm {
 
 /*--------------------------------------------TRANSPARENZ-HINWEIS (Falls nötig)-----------------------------------------------*/
 
+.transparenz {
+    padding: 5px 15px 5px 15px;
+}
 
+.transparenz p {
+    font-size: 0.85rem;
+}
 /*--------------------------------------------JOURNI - TEXT ----------------------------------------------------------------*/
 
 .flowText{
@@ -337,39 +343,94 @@ canvas#diagramm {
 
 .flowText h3 {
     margin-left: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 5px;
 }
 
 .paragraphs {
-    
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px;
 }
 
 .paragraphs p {
-    
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.paragraphs p a {
+    color: var(--primary-color);
+    text-decoration: underline;
 }
 
 /*--------------------------------------------FOOTER -----------------------------------------------------------------------*/
 
+/* footer: image left (1/3) and paragraph right (2/3) — always side-by-side */
 footer {
-    background-color: var(--background-color);
-    position: relative;
-    z-index: 1;
+  /* full-bleed background */
+  background-color: var(--background-color);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+
+  /* keep internal spacing */
+  padding: 20px 10px 25px;  /* extra bottom padding replaces margin */
+  margin-bottom: 0;   
+
+  flex-wrap: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top: 2px solid var(--primary-color);
 }
 
+footer::before {
+  content: "";
+  position: absolute;
+  left: calc(33% + 8px); /* horizontal position between img and text */
+  top: 5%;               /* start a bit from the top */
+  bottom: 5%;            /* end a bit above the bottom */
+  width: 2px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 9999; /* ensure visible above images/text */
+}
+
+/* image: fixed 1/3 width */
 footer img {
-
+  flex: 0 0 33.3333%;
+  width: 33.3333%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: 0;
 }
 
+/* paragraph: take remaining 2/3 */
 footer p {
-    
+  flex: 1 1 66%;
+  width: 66%;
+  margin-left: 3px;
+  margin-right: 3px;
+  text-align: left;
+  font-size: 0.8rem;
+  overflow-wrap: break-word;
 }
 
-footer a {
-    
+footer p a {
+  color: var(--primary-color);
+  text-decoration: underline;
 }
-
-
 /*------------------------MEDIA-QUERIES-----------------------------*/
 
 /* -----------------------------------------------------------------
