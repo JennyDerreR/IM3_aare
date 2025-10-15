@@ -191,9 +191,14 @@ header img {
     max-width: 100%;        /* prevents huge vertical overflow on small screens */
 }
 
-
-
 /*--------------------------------------------DIAGRAMM-------------------------------------------------------------------------*/
+
+.diagrammTitle h3 {
+   margin-left: 15px;
+   margin-bottom: 20px;
+   margin-top: -60px;
+   padding: 5px;
+}
 
 /*Bootgrösse für Diagramm (Chart.js Punkte)*/
 :root {
@@ -255,6 +260,7 @@ canvas#diagramm {
     width: 100% !important;
     height: auto !important;
 }
+
 
 /*----Pop-Up Styling----*/
 
@@ -324,6 +330,24 @@ canvas#diagramm {
 
 /*--------------------------------------------JOURNI - TEXT ----------------------------------------------------------------*/
 
+.flowText{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.flowText h3 {
+    margin-left: 15px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.paragraphs {
+    
+}
+
+.paragraphs p {
+    
+}
 
 /*--------------------------------------------FOOTER -----------------------------------------------------------------------*/
 
@@ -331,6 +355,18 @@ footer {
     background-color: var(--background-color);
     position: relative;
     z-index: 1;
+}
+
+footer img {
+
+}
+
+footer p {
+    
+}
+
+footer a {
+    
 }
 
 
