@@ -126,8 +126,6 @@ header img {
     transform: translateY(-15%);
     z-index: 1;    /* give it room so the background svg is visible */
     position: relative;
-    /*overflow-x: hidden;*/ /* only horizontal is clipped */
-    /*overflow-y: visible;*/  /* keep top/bottom visible */
 }
 
 .title {
@@ -450,64 +448,17 @@ footer p a {
     };
 }
 
-/* Freeze header + welcome content between 480px and 768px
-   mobile-first: content stays the same size; only backgrounds (body/map/swimmwest background area)
-   can expand. Place this block BEFORE your existing @media (min-width: 768px) rules. */
+/* In beetweeen size for responsiveness*/
 @media (min-width: 480px) and (max-width: 767.98px) {
 
   header img {
     max-height: 80px;
     max-width: 80px;
-    padding: 5px;
-    margin: 10px 0px 20px 10px;
-    z-index: 0;
-  }
-
-  /* welcome container fixed sizing */
-  .welcome {
-    /* preserve the mobile look: fixed min-height and margins in px */
-    min-height: 340px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    transform: translateY(-15%); /* keep your vertical offset */
-    overflow: visible;
-  }
-
-  /* freeze heading + tagline typography to the size at ~480px */
-  .title h1 {
-    font-size: 38px !important;   /* fixed visual size in the freeze range */
-    line-height: 1.0 !important;
-    margin: 0;
-  }
-
-  .tagline h2 {
-    font-size: 14px !important;
-    margin: 0;
-  }
-  .tagline img {
-    width: 36px !important; /* small fixed icon size */
-    height: auto;
-  }
-
-  /* keep swimmwest transform/scale constant (no vw-based scaling) */
-  .swimmwest,
-  .swimmwest img {
-    overflow: hidden; /* prevent swimmwest from adding vertical scroll */
   }
 
   .swimmwest img {
-    position: absolute !important;
-    left: 50% !important;
-    top: 0 !important;
-    transform: translate(-49%, -110%) scale(3) !important; /* fixed look */
-    transform-origin: center center !important;
-    opacity: 0.95 !important;
-    width: auto !important;
-    max-width: none !important;
-    max-height: 220% !important;
-    pointer-events: none;
+    max-width: 260px;
+    max-height: 300px;
   }
 
   /* fix map visual size so it doesn't drive layout height in this range */
