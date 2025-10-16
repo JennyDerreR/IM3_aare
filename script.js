@@ -1,6 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'unload.php'; // Pfad zu deinem PHP-Skript
 
+    const chartTextColor = getComputedStyle (document.documentElement)
+        .getPropertyValue('--primary-color')
+        .trim();
+    
+    const chartFontFamily = getComputedStyle (document.documentElement)
+        .getPropertyValue('--font-secondary')
+        .trim();
+
+    const chartFontSize = getComputedStyle (document.querySelector('p'))
+        .getPropertyValue('font-size')
+        .trim();
+
     const citiesOrder = [
         "brienz", "interlaken", "thun", "bern",
         "hagneck", "biel", "olten", "brugg"
@@ -36,6 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Städtenamen für die Anzeige formatieren (erster Buchstabe groß)
+            sortedCityNames = sortedCityNames.map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
+
             console.log("Sortierte Stadtnamen:", sortedCityNames);
             console.log("Sortierte Strömungswerte:", sortedFlowValues);
 
@@ -56,15 +71,37 @@ document.addEventListener('DOMContentLoaded', () => {
             // Messwerte umrechnen
             let yAchseProzent = yAchse.map(mapFlowToPercent);
 
+            //Boot Img
+            let bootImg = new Image ();
+            
+            if (window.innerWidth >= 1024) {
+                bootImg.src = 'pics/Boot02_22px.png'; // Desktop
+            }
+            else {
+                bootImg.src = 'pics/Boot02_13px.png'; // Mobile
+            }
+            bootImg.onload = () => {
+                 // Boot Grösse aus css auslesen
+                 const boatSize = parseInt(
+                     getComputedStyle(document.documentElement)
+                         .getPropertyValue('--boat-size')
+                         .trim(),
+                    
+                );
+                console.log("Boot Grösse:", boatSize);
+            
+
             let MyChart = document.getElementById('diagramm').getContext('2d');
                 new Chart(MyChart, {
                     type: "line",
                     data: {
                     labels: xAchse, 
                     datasets: [
-                        {
+                        {   
                             data: yAchseProzent,
-                            label: "Strömung"
+                            label: "Strömung",
+                            showLine: false,
+                            pointStyle: bootImg,
                         }
                     ]
                 },
@@ -72,38 +109,51 @@ document.addEventListener('DOMContentLoaded', () => {
                     responsive: true,
                     scales: {
                         y: {
-                            min: 0,    // Unterer Punkt der Achse
-                            max: 1,    // Oberer Punkt der Achse
+                            grid: { display: false },
+                            beginAtZero: true,
+                            min: 0,
+                            max: 1,
                             ticks: {
-                                callback: function(value, index, values) {
-                                    // Hier kannst du die Labels genau definieren
+                                font: {
+                                    family: chartFontFamily,
+                                    size: parseInt(chartFontSize)
+                                },
+                                color: chartTextColor,
+                                callback: function (value) {
                                     if (value === 0) return "0 m³/s";
                                     if (value === 0.25) return "125 m³/s";
                                     if (value === 0.5) return "200 m³/s";
                                     if (value === 0.75) return "245 m³/s";
-                                    // return "";
                                 },
                                 stepSize: 0.25
                             }
-                        },
-                            x: {
-                                ticks: {
-                                    autoSkip: false
-                                }
-                            }
-                        },
-                         plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        // Tooltip zeigt den echten Messwert an
-                                        return `${yAchse[context.dataIndex]} m³/s`;
-                                    }
-                                }
+                        }, 
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                autoSkip: false,
+                                font: {
+                                    family: chartFontFamily,
+                                    size: parseInt(chartFontSize)
+                                },
+                                color: chartTextColor
                             }
                         }
+                        },
+                        plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${yAchse[context.dataIndex]} m³/s`;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: false // optional: Legende ausblenden
+                        }
                     }
+                }
             });
-        })
-})
-
+        }
+    });
+});

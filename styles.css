@@ -202,7 +202,7 @@ header img {
 
 /*Bootgrösse für Diagramm (Chart.js Punkte)*/
 :root {
-    --boat-size: 20; /*Standardgrösse für Mobile*/
+    --boat-size: 10; /*Standardgrösse für Mobile*/
 }
 
 /* Canvas-Container für responsives Verhalten */
@@ -445,6 +445,9 @@ footer p a {
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
         display: none; 
     }
+    :root {
+        --boat-size: 1;
+    };
 }
 
 /* ----------------- Tablet (≥ 768px) ----------------- */
@@ -457,7 +460,7 @@ footer p a {
     h3 { font-size: 1.25rem; }      /* ~20px */
     p  { font-size: 1.0625rem; }    /* ~17px */
     :root {
-        --boat-size: 30; /*Grösse für Tablet*/
+        --boat-size: 1; /*Grösse für Tablet*/
     };
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
         display: none; 
@@ -481,7 +484,7 @@ footer p a {
         font-size: 1.125rem; /* ~18px */
     }
     :root {
-        --boat-size: 40; /*Grösse für Desktop klein*/
+        --boat-size: 1; /*Grösse für Desktop klein*/
     }
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop {
         display: block;
@@ -513,7 +516,7 @@ footer p a {
         font-size: 1.125rem; /* keep paragraph readable */
     }
     :root {
-        --boat-size: 50; /*Grösse für Desktop gross*/
+        --boat-size: 1; /*Grösse für Desktop gross*/
     }
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop {
         display: block;
