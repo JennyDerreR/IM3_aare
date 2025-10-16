@@ -98,35 +98,36 @@
                 </div>
             </div>
 
-                <!-- Zeitbereich-Auswahl-->
-                <div id ="chart-menu" class="chart-menu">
-                    <select id = "rangeSelect">
-                        <option value="today">Heute</option>
-                        <option value="yesterday">Gestern</option>
-                        <option value="lastWeek">Letzte Woche</option>
-                        <option value="lastMonth">Letzter Monat</option>
-                        <option value="custom">Zeitraum wählen</option>
-                    </select>
+            <!-- Zeitbereich-Auswahl -->
+            <div id ="chart-menu" class="chart-menu">
+                <select id = "rangeSelect">
+                    <option value="today">Heute</option>
+                    <option value="yesterday">Gestern</option>
+                    <option value="lastWeek">Letzte Woche</option>
+                    <option value="lastMonth">Letzter Monat</option>
+                    <option value="custom">Zeitraum wählen</option>
+                </select>
 
-                    <div id="customRangeInputs" style="display:none;">
-                        <label>Von: <input type="date" id="startDate"></label>
-                        <label>Bis: <input type="date" id="endDate"></label>
-                        <button id="applyCustomRange">Anwenden</button>
-                    </div>
+                <div id="customRangeInputs" style="display:none;">
+                    <label>Von: <input type="date" id="startDate"></label>
+                    <label>Bis: <input type="date" id="endDate"></label>
+                    <button id="applyCustomRange">Anwenden</button>
                 </div>
+            </div>
 
-                <canvas id="diagramm"></canvas>
 
-                <div id="popup-overlay" class="hidden">
-                    <div id="popup-content">
-                        <h3 id="popup-city"></h3>
-                        <p>Wassertemperatur: <span id="popup-water"></span>°C → <span id="popup-water-text"></span></p>
-                        <p>Lufttemperatur: <span id="popup-air"></span>°C</p>
-                        <p>Momentani Strömig: <span id="popup-flow"></span> m³/s → <span id="popup-flow-text"></span></p>
-                        <p>Durchschnittlächi Strömig: <span id="popup-average"></span> m³/s</p>
-                        <button id="popup-close">Schliessen</button>
-                    </div>
-                    </div>
+            <canvas id="diagramm"></canvas>
+
+            <div id="popup-overlay" class="hidden">
+                <div id="popup-content">
+                    <h3 id="popup-city"></h3>
+                    <p>Wassertemperatur: <span id="popup-water"></span>°C → <span id="popup-water-text"></span></p>
+                    <p>Lufttemperatur: <span id="popup-air"></span>°C</p>
+                    <p>Momentani Strömig: <span id="popup-flow"></span> m³/s → <span id="popup-flow-text"></span></p>
+                    <p>Durchschnittlächi Strömig: <span id="popup-average"></span> m³/s</p>
+                    <button id="popup-close">Schliessen</button>
+                </div>
+            </div>
             </article>
 
             <article class="transparenz">
@@ -188,6 +189,31 @@
                     </div>
                 </article>
             </article>
+
+
+
+
+
+
+        <!-- Zeitbereich-Auswahl
+            <div id ="chart-menu" class="chart-menu">
+                <select id = "rangeSelect">
+                    <option value="today">Heute</option>
+                    <option value="yesterday">Gestern</option>
+                    <option value="lastWeek">Letzte Woche</option>
+                    <option value="lastMonth">Letzter Monat</option>
+                    <option value="custom">Zeitraum wählen</option>
+                </select>
+
+                <div id="customRangeInputs" style="display:none;">
+                    <label>Von: <input type="date" id="startDate"></label>
+                    <label>Bis: <input type="date" id="endDate"></label>
+                    <button id="applyCustomRange">Anwenden</button>
+                </div>
+            </div> -->
+
+
+
         </main>
         
         <footer>

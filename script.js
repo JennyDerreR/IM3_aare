@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
     // === Zeitbereich Filter ===
     const rangeSelect = document.getElementById('rangeSelect')
     const customInputs = document.getElementById('customRangeInputs');
@@ -168,11 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const endDateInput = document.getElementById('endDate');
     const applyCustomBtn = document.getElementById('applyCustomRange');
 
-        function fetchDataWithRange(range, start = null, end = null) {
-            let url = 'unload_range.php?range=' + range;
-            if (range === 'custom' && start && end) {
-                url += `&start=${start}&end=${end}`;
-            }
+        function fetchDataWithRange(range, start, end) {
+            let url = 'unload_range.php?range=' + range + '&startDate=' + start + '&endDate=' + end;
+            // if (range === 'custom' && start && end) {
+            //     url += `&start=${start}&end=${end}`;
+            // }
 
             fetch(url)
                 .then(res => res.json())
@@ -185,14 +187,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(err => console.error('Fehler beim Laden der Daten:', err));
         }
         function updateChart(data) {
-            const latestPerCity = {};
+            const latestPerCity = [];
             // const today = new Date().toISOString().split('T')[0];
 
             // Letzter Messwert pro Stadt
-            data.forEach(item => {
+            for (let i = 0; i < Math.min(8, data.length); i++) {
+                const item = data[i];
                 const city = item.location_id;
                 if (!latestPerCity[city]) latestPerCity[city] = item;
-            });
+            }
+
+            console.log("Letzte Messwerte pro Stadt (gefiltert):", latestPerCity);
 
             let sortedCityNames = [];
             let sortedFlowValues = [];
@@ -310,3 +315,5 @@ applyCustomBtn.addEventListener('click', () => {
         alert('Bitte Start- und Enddatum angeben')
     }
 });
+
+// Daten existieren ja schon im vorherigen Funktiongedöns. Hast zu viel mit ChatGPT gearbeitet.
