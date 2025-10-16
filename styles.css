@@ -502,6 +502,10 @@ footer p a {
         font-size: 1.15rem;
     }
 
+    h3 {
+        font-size: 2rem;
+    }
+
     header img {
         max-height: 80px;
         max-width: 80px;
@@ -512,16 +516,19 @@ footer p a {
         max-height: 260px;
     }
 
-  /* fix map visual size so it doesn't drive layout height in this range */
-    .map {
-        max-height: 420px;
+    .tagline img {
+        max-width: 130px;
+        max-height: 50px;
     }
-
+    
     .map img {
-        transform: scale(1.07) translateY(-20%) !important;
-        object-position: center top !important;
-        max-width: 100%;
+        width: clamp(100%, 90vw, 900px);  /* grows smoothly until 900px */
         height: auto;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.09) translateY(-24%);
+        transform-origin: center center;
+        padding: 10px;
     }
 
 }
@@ -545,7 +552,7 @@ footer p a {
     z-index: 0;
   }
 
-    
+  
 
 
     :root {
