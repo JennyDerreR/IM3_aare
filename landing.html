@@ -98,6 +98,23 @@
                 </div>
             </div>
 
+                <!-- Zeitbereich-Auswahl-->
+                <div id ="chart-menu" class="chart-menu">
+                    <select id = "rangeSelect">
+                        <option value="today">Heute</option>
+                        <option value="yesterday">Gestern</option>
+                        <option value="lastWeek">Letzte Woche</option>
+                        <option value="lastMonth">Letzter Monat</option>
+                        <option value="custom">Zeitraum wählen</option>
+                    </select>
+
+                    <div id="customRangeInputs" style="display:none;">
+                        <label>Von: <input type="date" id="startDate"></label>
+                        <label>Bis: <input type="date" id="endDate"></label>
+                        <button id="applyCustomRange">Anwenden</button>
+                    </div>
+                </div>
+
                 <canvas id="diagramm"></canvas>
 
                 <div id="popup-overlay" class="hidden">
