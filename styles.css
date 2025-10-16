@@ -434,6 +434,7 @@ footer p a {
 /* -----------------------------------------------------------------
     OVERVIEW:
     - Base (phone): default styles (no media query)
+    - In between: 480px - 767.98px
     - Tablet:     min-width: 768px
     - Small desk: min-width: 1024px
     - Large desk: min-width: 1440px
@@ -451,37 +452,36 @@ footer p a {
 /* In beetweeen size for responsiveness*/
 @media (min-width: 480px) and (max-width: 767.98px) {
 
-  header img {
-    max-height: 80px;
-    max-width: 80px;
-  }
+    h1 {
+        font-size: 4.3rem;
+    }
 
-  .swimmwest img {
-    max-width: 260px;
-    max-height: 300px;
-  }
+    h2 {
+        font-size: 1.15rem;
+    }
+
+    header img {
+        max-height: 80px;
+        max-width: 80px;
+    }
+
+    .swimmwest img {
+        max-width: 220px;
+        max-height: 260px;
+    }
 
   /* fix map visual size so it doesn't drive layout height in this range */
-  .map {
-    max-height: 420px;
-  }
-  .map img {
-    transform: scale(1.07) translateY(-20%) !important;
-    object-position: center top !important;
-    max-width: 100%;
-    height: auto;
-  }
+    .map {
+        max-height: 420px;
+    }
 
-  /* ensure headings inside welcome don't inherit vw-based scaling */
-  .welcome h1, .welcome h2, .welcome h3, .welcome p {
-    font-size: inherit;
-  }
+    .map img {
+        transform: scale(1.07) translateY(-20%) !important;
+        object-position: center top !important;
+        max-width: 100%;
+        height: auto;
+    }
 
-  /* keep any clamp()/vw rules from growing within the freeze window */
-  h1, h2, h3, p {
-    /* small, safe overrides so typographic scaling rules that use vw/clamp don't apply here */
-    font-size: unset;
-  }
 }
 
 
