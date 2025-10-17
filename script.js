@@ -189,17 +189,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     const label = chartInstance.data.labels[dataIndex];
                     const value = chartInstance.data.datasets[datasetIndex].data[dataIndex];
 
-                    console.log('Klick auf Stadt: ${label} {Strömung: $value})');
+                    console.log('Klick auf Stadt: ${label}, Strömung: ${value}');
 
-                    // Beispiel: Popup einblenden
+                    // Popup Position
+                    const CanvasRect = chartElement.getBoundingClientRect();
+                    const x = firstPoint.element.x + CanvasRect.left;
+                    const y = firstPoint.element.y + CanvasRect.top;
+                    
+                    // Popup einblenden
                     const overlay = document.getElementById('popup-overlay');
+                    const popup = document.getElementById('popup-content');
                     const popupCity = document.getElementById('popup-city');
                     const popupFlow = document.getElementById('popup-flow');
 
-                    if (overlay && popupCity && popupFlow) {
+                    if (overlay && popup && popupCity && popupFlow) {
                         popupCity.textContent = label;
                         popupFlow.textContent = (value).toFixed(0); 
+
+                        // Popup positionieren und anzeigen
                         overlay.classList.remove('hidden');
+
+                        console.log(`Popup positioniert bei (${x}, ${y}`);
                     }
                 }   
             });
@@ -207,9 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeBtn = document.getElementById('popup-close');
             if (closeBtn) {
                 closeBtn.addEventListener('click', () => {
-                    document.getElementById('popup-overlay')?.classList.add('hidden');
+                    document.getElementById('popup-overlay')?.classList.add('hidden')
                 });
             }
         }
-    }, 300); // Überprüfe alle 100ms
+    }, 300); // Überprüfe alle 300ms
 });
+
+// // Popup Schliessen bei Klick ausserhalb
+// document.addEventListener('click', (event) => {
+//     const popup = document.getElementById('popup-content');
+//     if (popup && !popup.contains(event.target)) {
+//         document.getElementById('popup-overlay')?.classList.add('hidden');
+//     }
+// });
