@@ -161,159 +161,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Popup Script
 
+document.addEventListener('DOMContentLoaded', () => {
+    //warten, bis Chart existiert
+    const waitForChart = setInterval(() => {
+        const chartElement = document.getElementById('diagramm');
+        const chartInstance = Chart.getChart(chartElement);
 
-    // === Zeitbereich Filter ===
-    const rangeSelect = document.getElementById('rangeSelect')
-    const customInputs = document.getElementById('customRangeInputs');
-    const startDateInput = document.getElementById('startDate');
-    const endDateInput = document.getElementById('endDate');
-    const applyCustomBtn = document.getElementById('applyCustomRange');
+        if (chartInstance) {
+            clearInterval(waitForChart);
+            console.log("Chart ist bereit, Popup-Script wird initialisiert.");
 
-        function fetchDataWithRange(range, start, end) {
-            let url = 'unload_range.php?range=' + range + '&startDate=' + start + '&endDate=' + end;
-            // if (range === 'custom' && start && end) {
-            //     url += `&start=${start}&end=${end}`;
-            // }
+            chartElement.addEventListener('click', (event) => {
+                const points = chartInstance.getElementsAtEventForMode(
+                    event, 
+                    'nearest', //Nächster Punkt
+                    { intersect: true }, // Nur wenn direkt auf Punkt geklickt
+                    false
+                );
+                
+                if (points.length) {
+                    const firstPoint = points[0];
+                    const datasetIndex = firstPoint.datasetIndex;
+                    const dataIndex = firstPoint.index;
 
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Gefilterte Daten:", data);
-                    // Hier kannst du die Daten weiterverarbeiten und das Diagramm aktualisieren
+                    const label = chartInstance.data.labels[dataIndex];
+                    const value = chartInstance.data.datasets[datasetIndex].data[dataIndex];
 
-                    updateChart(data);
-                })
-                .catch(err => console.error('Fehler beim Laden der Daten:', err));
-        }
-        function updateChart(data) {
-            const latestPerCity = [];
-            // const today = new Date().toISOString().split('T')[0];
+                    console.log('Klick auf Stadt: ${label} {Strömung: $value})');
 
-            // Letzter Messwert pro Stadt
-            for (let i = 0; i < Math.min(8, data.length); i++) {
-                const item = data[i];
-                const city = item.location_id;
-                if (!latestPerCity[city]) latestPerCity[city] = item;
-            }
+                    // Beispiel: Popup einblenden
+                    const overlay = document.getElementById('popup-overlay');
+                    const popupCity = document.getElementById('popup-city');
+                    const popupFlow = document.getElementById('popup-flow');
 
-            console.log("Letzte Messwerte pro Stadt (gefiltert):", latestPerCity);
-
-            let sortedCityNames = [];
-            let sortedFlowValues = [];
-
-            for (const stadt of citiesOrder) {
-                if (latestPerCity[stadt]) {
-                    sortedCityNames.push(stadt.charAt(0).toUpperCase() + stadt.slice(1).toLowerCase());
-                    sortedFlowValues.push(parseFloat(latestPerCity[stadt].flow));
-                }
-            }
-
-            let yAchseProzent = sortedFlowValues.map(Flow => {
-                if (Flow <= 0) return 0;
-                if (Flow <= 125) return 0.25;
-                if (Flow >= 245) return 0.75;
-                return 0.25 + ((Flow - 125) / (245 - 125)) * (0.75 - 0.25);
+                    if (overlay && popupCity && popupFlow) {
+                        popupCity.textContent = label;
+                        popupFlow.textContent = (value).toFixed(0); 
+                        overlay.classList.remove('hidden');
+                    }
+                }   
             });
 
-            // Boot-Bild neu laden
-            const bootImg = new Image();
-            bootImg.src = window.innerWidth >= 1024 ? 'pics/Boot02_22px.png' : 'pics/Boot02_13px.png';
-
-            bootImg.onload = () => {
-                const boatSize = parseInt(
-                    getComputedStyle(document.documentElement)
-                        .getPropertyValue('--boat-size')
-                        .trim()
-                );
-
-                const MyChart = document.getElementById('diagramm').getContext('2d');
-                if (window.myChartInstance) {
-                    window.myChartInstance.destroy();
-                }
-
-                //Neuen Chart erstellen
-                window.myChartInstance = new Chart(MyChart, {
-                    type: "line",
-                    data: {
-                        labels: sortedCityNames,
-                        datasets: [{
-                            data: yAchseProzent,
-                            label: "Strömung",
-                            showLine: false,
-                            pointStyle: bootImg,
-                            pointRadius: boatSize,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                grid: { display: false },
-                                min: 0,
-                                max: 1,
-                                ticks: {
-                                    font: {
-                                        family: chartFontFamily,
-                                        size: parseInt(chartFontSize)
-                                    },
-                                    color: chartTextColor,
-                                    callback: function (value) {
-                                        if (value === 0) return "0 m³/s";
-                                        if (value === 0.25) return "125 m³/s";
-                                        if (value === 0.5) return "200 m³/s";
-                                        if (value === 0.75) return "245 m³/s";
-                                    },
-                                    stepSize: 0.25
-                                }
-                            },
-                            x: {
-                                grid: { display: false },
-                                offset: true,
-                                ticks: {
-                                    autoSkip: false,
-                                    font: {
-                                        family: chartFontFamily,
-                                        size: parseInt(chartFontSize)
-                                    },
-                                    color: chartTextColor
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: {
-                                callbacks: {
-                                    label: function (context) {
-                                        return `${sortedFlowValues[context.dataIndex]} m³/s`;
-                                    }
-                                }
-                            }
-                        }
-                    }
+            const closeBtn = document.getElementById('popup-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    document.getElementById('popup-overlay')?.classList.add('hidden');
                 });
-            };
+            }
         }
-
-// ==== Event Listener für Menü ===
-rangeSelect.addEventListener('change', () => {
-    const range = rangeSelect.value;
-
-    if (range === 'custom') {
-        customInputs.style.display = 'inline-flex';
-    } else {
-        customInputs.style.display = 'none';
-    }
+    }, 300); // Überprüfe alle 100ms
 });
-
-applyCustomBtn.addEventListener('click', () => {
-    const start = startDateInput.value;
-    const end = endDateInput.value;
-    if (start && end) {
-        fetchDataWithRange('custom', start, end);
-    } else {
-        alert('Bitte Start- und Enddatum angeben')
-    }
-});
-
-// Daten existieren ja schon im vorherigen Funktiongedöns. Hast zu viel mit ChatGPT gearbeitet.

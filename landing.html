@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <!-- Zeitbereich-Auswahl -->
+            <!-- Zeitbereich-Auswahl: mal sein lassen. Wenn Zeit und Musse noch existiert, dann wieder dran schaffen, lol
             <div id ="chart-menu" class="chart-menu">
                 <select id = "rangeSelect">
                     <option value="today">Heute</option>
@@ -113,7 +113,7 @@
                     <label>Bis: <input type="date" id="endDate"></label>
                     <button id="applyCustomRange">Anwenden</button>
                 </div>
-            </div>
+            </div> -->
 
 
             <canvas id="diagramm"></canvas>
@@ -126,6 +126,11 @@
                     <p>Momentani Strömig: <span id="popup-flow"></span> m³/s → <span id="popup-flow-text"></span></p>
                     <p>Durchschnittlächi Strömig: <span id="popup-average"></span> m³/s</p>
                     <button id="popup-close">Schliessen</button>
+                    <div class = "popup-wellen">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="391" height="57" viewBox="0 0 391 57" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 53.7592C0 53.7592 10.8886 50.9595 43.0595 50.9595C58.3611 50.9595 67.0566 52.3261 76.1757 53.7592C86.2291 55.3391 96.7974 57 117.3 57C138.704 57 151.061 55.1899 162.246 53.5514C171.493 52.1968 179.939 50.9595 192.035 50.9595C203.968 50.9595 212.448 52.1636 221.835 53.4966C233.473 55.1493 246.507 57 269.246 57C281.579 57 293.758 55.4875 305.928 53.9763C318.079 52.4673 330.22 50.9595 342.496 50.9595C351.609 50.9595 372.687 50.9595 391 53.5514V31.9746V7.01999C379.122 2.49802 370.213 0.000617074 358.334 0.000672245C345.587 0.00073145 321.372 7.01999 321.372 7.01999C321.372 7.01999 297.533 13.9302 285.084 13.9882C271.874 14.0498 259.028 10.5238 246.179 6.99694C233.53 3.52502 220.878 0.0523066 207.873 0.000672245C193.639 -0.0558457 181.986 3.46082 170.319 6.98171C158.777 10.465 147.221 13.9524 133.138 13.9882C118.18 14.0261 107.066 10.5158 95.9438 7.00271C84.8707 3.50527 73.7891 0.00512216 58.8975 0.000672245C28.8561 -0.0083047 0 13.9882 0 13.9882V53.7592Z" fill="#4097A2"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
             </article>

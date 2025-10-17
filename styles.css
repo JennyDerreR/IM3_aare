@@ -288,7 +288,7 @@ header img {
     z-index: 2; top: 30%; 
 }   /* mittlere */
 .wave3 { 
-    z-index: 3; top: 50%; 
+    z-index: 3; top: 60%; 
 }   /* dunkelste unten */
 
 canvas#diagramm {
@@ -305,24 +305,34 @@ canvas#diagramm {
 /*----Pop-Up Styling----*/
 
 /* --- Popup Overlay --- */
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: #FFFBF4;
-  backdrop-filter: blur(3px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: opacity 0.3s ease;
+#popup-overlay {
+    position: fixed;
+    width: 391px;
+    height: 231px;
+    inset: 0;
+    background: #FFFBF4;
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
 }
 
-.popup-overlay.hidden {
+.popup-wellen {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: #4097A2;
+}
+
+#popup-overlay.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.popup-content {
+#popup-content {
   background: #FFFBF4;
   border-radius: 1rem;
   padding: 2rem;
@@ -333,7 +343,7 @@ canvas#diagramm {
   text-align: left;
 }
 
-.popup-content h3 {
+#popup-content h3 {
   font-family: var(--font-primary);
   font-size: 1.5rem;
   font-weight: 400;
@@ -341,7 +351,7 @@ canvas#diagramm {
   margin-bottom: 1rem;
 }
 
-.popup-content p {
+#popup-content p {
   font-family: var(--font-secondary);
   font-size: 1rem;
   margin: 0.3rem 0;
@@ -361,9 +371,9 @@ canvas#diagramm {
   transition: transform 0.2s ease;
 }
 
-.popup-close:hover {
+/* .popup-close:hover {
   transform: scale(1.2);
-}
+}  */
 
 /*--------------------------------------------TRANSPARENZ-HINWEIS (Falls nötig)-----------------------------------------------*/
 
