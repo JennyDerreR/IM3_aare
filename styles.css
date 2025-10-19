@@ -569,6 +569,8 @@ footer p a {
     }
 
 
+
+
 }
 
 
@@ -590,7 +592,13 @@ footer p a {
     z-index: 0;
   }
 
-  
+  .transparenz {
+
+  }
+
+  .transparenz p {
+    font-size: 1rem;
+  }
 
 
     :root {
