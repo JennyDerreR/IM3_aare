@@ -605,14 +605,44 @@ footer p a {
     }
 
     header img {
-    max-height: 80px;
-    max-width: 80px;
-    padding: 5px;
-    margin: 10px 0px 20px 10px;
-    z-index: 0;
-  }
+        max-height: 80px;
+        max-width: 80px;
+        padding: 5px;
+        margin: 10px 0px 20px 10px;
+        z-index: 0;
+    }
 
+    .welcome {
+        flex-direction: row; /* keep your main structure */
+        align-items: center;    /* still center other children */
+    }
 
+    .welcome {
+        display: flex;
+        justify-content: space-between; /* logo left, tagline right */
+        align-items: center;
+        max-width: 100%;   
+        height: 100%;                
+        margin: 0 20px;                 /* keep centered within parent */
+        max-width: 1200px;              /* optional: prevent too wide */
+    }
+
+    .welcome h1 {
+        align-items: center;
+        margin: 0 60px 0 100px;
+    }
+
+    .welcome .swimmwest {
+        margin-left: 50px;
+    }
+
+    .welcome .swimmwest img {
+        max-width: 200px;
+        max-height: 240px;
+        
+
+        
+    }
 
   .transparenz {
 
