@@ -593,7 +593,7 @@ footer p a {
     }     
 
     h2 { 
-        font-size: 1.7rem; 
+        font-size: 1.6rem; 
     }
     
     h3 { 
@@ -605,15 +605,14 @@ footer p a {
     }
 
     header img {
-        max-height: 80px;
-        max-width: 80px;
+        max-height: 90px;
+        max-width: 90px;
         padding: 5px;
         margin: 10px 0px 20px 10px;
         z-index: 0;
     }
 
-
-    /* .welcome {
+    .welcome {
         flex-direction: row; 
         align-items: center;    
     }
@@ -626,49 +625,42 @@ footer p a {
         height: 100%;                
         margin: 0 20px;                 
         max-width: 1200px;              
-    } */
-
-    .welcome {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        max-width: 1200px;
-        margin: 0 auto;
-        transform: none; /* optional: stop that translateY shift */
-    }
-
-
-    .welcome h1 {
-        align-items: center center;
-        margin: 0 60px 0 100px;
-    }
+    } 
 
     .welcome .swimmwest {
         margin-left: 50px;
     }
-
+    
     .welcome .swimmwest img {
         max-width: 200px;
         max-height: 240px;
         position: absolute;
-        top: 73%; 
+        top: 78%; /*73*/
         left: 19%;
-        
+    }
+
+    .welcome .title {
+        position: absolute;
+        top: 84%;       /* same vertical alignment as the vest */
+        left: 19%;      /* same horizontal reference as the vest */
+        transform: translate(-50%, -120%); /* fine-tune placement */
+        z-index: 2;     /* make sure it sits above the image */
     }
 
     .welcome .tagline {
-        margin-right: 20px;
-        margin-left: -20px;
+        position: relative; /* make sure it’s not affected by absolute stacking */
+        margin-top: 60px;  /* push it below the image/title stack */
+        margin-left: 200px;
+        text-align: center; /* or adjust as needed */
     }
 
-  .transparenz {
+    .transparenz {
 
-  }
+    }
 
-  .transparenz p {
-    font-size: 1rem;
-  }
+    .transparenz p {
+        font-size: 1rem;
+    }
 
 
     :root {
@@ -677,7 +669,6 @@ footer p a {
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
         display: none; 
     }
-
 
 }
 
