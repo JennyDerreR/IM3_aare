@@ -571,6 +571,16 @@ footer p a {
         clear: both;
     }
 
+    .transparenz p {
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    .flowText h3 {
+        margin-left: 30px;
+    }
+
     .paragraphs p {
         padding-left: 10px;
         padding-right: 10px;
@@ -664,11 +674,11 @@ footer p a {
     .map {
         position: relative;
         z-index: 0;
-        overflow: hidden;
         max-width: 1000px;       /* keep it centered, not full-bleed */
         margin: 50px auto 30px;  /* ⬅️ this line adds top spacing */
         min-height: clamp(450px, 55vw, 700px); /* scales smoothly with viewport */
         border-radius: 8px;
+        padding: 10px;
     }
 
     .map h3 {
@@ -684,18 +694,55 @@ footer p a {
         object-position: center;
         transform: scale(1.04) translateY(-24%);
         transform-origin: center;
-        /*transition: transform 0.3s ease;*/
         border-radius: 8px;
     }
 
-    .transparenz {
-        padding: 5px 15px 5px 15px;
+     .diagrammTitle h3 {
+        margin-top: 290px;   /* push the title down a bit more */
+        margin-left: 30px;
+    }
+
+    .diagramm {
+        margin-top: 16px;
+        clear: both;
     }
 
     .transparenz p {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
+    .flowText h3 {
+        margin-left: 30px;
+    }
+
+    .paragraphs p {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    footer img {
+        flex: 0 0 auto;          /* keep natural sizing */
+        width: 200px;            /* smaller fixed width */
+        max-width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* slightly larger paragraph text */
+    footer p {
+        flex: 1 1 auto;
+        font-size: 1.175rem;      /* just a bit bigger than mobile (0.8rem) */
+        line-height: 1.45;
+        width: auto;             /* let it flow naturally next to image */
+        padding-left: 10px;
+    }
+
+    /* adjust divider to align with new image width */
+    footer::before {
+     left: calc(200px + 10px); /* image width + small gap */
+    }
 
     :root {
         --boat-size: 30; /*Grösse für Tablet*/
@@ -728,7 +775,7 @@ footer p a {
     margin: 10px 0px 20px 10px;
     z-index: 0;
     }
-
+    
 
     :root {
         --boat-size: 40; /*Grösse für Desktop klein*/
