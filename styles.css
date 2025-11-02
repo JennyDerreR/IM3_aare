@@ -486,9 +486,9 @@ footer p a {
 
 /* -----------------------------------------------------------------
     OVERVIEW:
-    - Base (phone): default styles (no media query)
-    - In between: 480px - 767.98px
-    - Tablet:     min-width: 768px
+    - Base (phone): default styles (no media query) DONE (Ohne Diagramm?)
+    - In between: 480px - 767.98px DONE (Ohne Diagramm)
+    - Tablet:     min-width: 768px DONE (Ohne Diagramm)
     - Small desk: min-width: 1024px
     - Large desk: min-width: 1440px
    ----------------------------------------------------------------- */
