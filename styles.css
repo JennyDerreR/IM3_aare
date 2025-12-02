@@ -833,32 +833,44 @@ footer p a {
     .diagramm .wave svg {
         width: 100%;
         height: auto;
-    } */
+    }
 }
 
 /* ----------------- Large desktop (≥ 1440px) ----------------- */
 @media (min-width: 1440px) {
-    h1 {
-        font-size: 3rem;
-    }
-    h2 {
-        font-size: 2rem; /* ~32px */
-    }
-    h3 {
-        font-size: 1.5rem; /* ~24px */
-    }
-    p {
-        font-size: 1.125rem; /* keep paragraph readable */
-    }
+     /* Schriftgrössen */
+    h1 { font-size: 5rem; }
+    h2 { font-size: 1.9rem; }
+    h3 { font-size: 2.7rem; }
+    p  { font-size: 1.4rem; }
 
+    /* Header */
     header img {
-    max-height: 95px;
-    max-width: 95px;
-    padding: 5px;
-    margin: 10px 0px 20px 10px;
-    z-index: 0;
+        max-height: 95px;
+        max-width: 95px;
+        padding: 5px;
+        margin: 10px 0px 20px 10px;
+        z-index: 0;
     }
 
+    .welcome .title {
+        top: 90%;
+        left: 22%;
+        transform: translate(-50%, -150%);
+    }
+
+   /* Tagline-Block für sehr grosse Screens */
+    .welcome .tagline {
+        position: relative;
+        margin-top: 70px;
+        margin-left: 230px;   /* weiter links als vorher (260px) */
+        text-align: left;
+    }
+
+    .welcome .tagline img {
+        width: 200px;         /* fix groesser als bei 1024px */
+        display: block;
+    }
 
     :root {
         --boat-size: 50; /*Grösse für Desktop gross*/
@@ -870,10 +882,21 @@ footer p a {
         display: none; 
     }
 
-    /* SVG Skalierung für alle Wellen */
-    .diagramm .wave svg {
-        width: 100%;
-        height: auto;
+    /* Breite Inhalte zentrieren (wie bei kleineren Breakpoints) */
+    .map {
+        max-width: 1800px;
+        margin-left: auto;
+        margin-right: auto;
     }
-}
 
+    /* Map leicht grösser, aber kontrolliert */
+    .map {
+        max-width: 1200px;
+        min-height: clamp(500px, 45vw, 750px);
+        margin: 60px auto 40px;
+    }
+
+    /* Diagrammtitel etwas nach unten ziehen */
+    .diagrammTitle h3 {
+        margin-top: 260px;
+    }
