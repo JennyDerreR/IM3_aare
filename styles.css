@@ -755,17 +755,17 @@ footer p a {
 
 /* ----------------- Small desktop (≥ 1024px) ----------------- */
 @media (min-width: 1024px) {
-     h1 {
-        font-size: 2.5rem;
+    h1 {
+        font-size: 4.8rem;
     }
     h2 {
         font-size: 1.75rem; /* ~28px */
     }
     h3 {
-        font-size: 1.375rem; /* ~22px */
+        font-size: 2.6rem; /* ~22px */
     }
     p {
-        font-size: 1.125rem; /* ~18px */
+        font-size: 1.35rem; /* ~18px */
     }
 
     header img {
@@ -776,6 +776,47 @@ footer p a {
     z-index: 0;
     }
     
+    /* Hero-Bereich (Welcome) zentrieren und etwas „luftiger“ machen */
+    .welcome {
+        max-width: 1200px;
+        margin: 20px auto 0;
+        transform: translateY(-12%);
+    }
+
+    /* Weste etwas grösser und harmonisch positioniert */
+    .welcome .swimmwest img {
+        max-width: 260px;
+        max-height: 320px;
+        position: absolute;
+        top: 75%;
+        left: 22%;
+        opacity: 0.95;
+    }
+
+    /* Titel bleibt über der Weste, leicht nach oben gezogen */
+    .welcome .title {
+        position: absolute;
+        top: 80%;
+        left: 22%;
+        transform: translate(-50%, -135%);
+        z-index: 2;
+        text-align: center;
+    }
+
+    /* Tagline weiter nach rechts, damit sie nicht in die Weste läuft */
+    .welcome .tagline {
+        position: relative;
+        margin-top: 70px;
+        margin-left: 260px;
+        text-align: left;
+    }
+
+    .tagline img {
+        min-width: 10%;
+        min-height: 10%;
+        max-width: 18%;
+        max-height: 18%;
+    }
 
     :root {
         --boat-size: 40; /*Grösse für Desktop klein*/
@@ -792,7 +833,7 @@ footer p a {
     .diagramm .wave svg {
         width: 100%;
         height: auto;
-    }
+    } */
 }
 
 /* ----------------- Large desktop (≥ 1440px) ----------------- */
