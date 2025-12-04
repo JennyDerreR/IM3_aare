@@ -19,10 +19,10 @@
 }
 
 body {
+    /*---------- Hintergrund ----------------*/
     background-color: var(--background-color);
 
-   /* ---- Fallback stops (work everywhere) ---- */
-    --grad-1: rgba(64,151,162,0.5);   /* 50% opacity */
+    --grad-1: rgba(64,151,162,0.5); 
     --grad-2: rgba(255,251,244,1);    
     --grad-3: rgba(255,251,244,1);    
     --grad-4: rgba(159,201,203,0.6); 
@@ -34,7 +34,6 @@ body {
     --grad-4-pos: 58%;
     --grad-5-pos: 90%;
 
-    /* paint the gradient across the page using your --grad-* variables */
     background-image: linear-gradient(
     180deg,
     var(--grad-1) var(--grad-1-pos),
@@ -44,78 +43,69 @@ body {
     var(--grad-5) var(--grad-5-pos)
     );
 
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: scroll;
-
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
 }
 
-/* Prevent any horizontal page scrolling */
-html, body {
-  overflow-x: hidden;
-  overscroll-behavior-x: none; /* prevents swipe/overscroll horizontally on supporting browsers */
-}
+/*--------- Verhalten der Seite------------- */
+    html, body {
+        overflow-x: hidden;
+        overscroll-behavior-x: none;
+    }
 
-/* Optional safety: ensure images/SVGs don't push page wider than viewport */
-img, svg {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+/*------ Zur Sicherhiet der Bilder ------------*/
+    img, svg {
+        max-width: 100%;
+        height: auto;
+        display: block;
+    }
 
-    /*-------------------Schriftgrössen (NOCH GEGENCHECKEN UND ANPASSEN)-------------------*/
+/*-------------------Schriftgrössen -------------------*/
+    h1, h2, h3, p {
+        font-style: normal;
+        color: var(--primary-color);
+    }
 
-h1 {
-    font-family: var(--font-primary);
-    font-size: 4rem;
-    font-style: normal;
-    font-weight: 400;
-    color: var(--primary-color);
-}
+    h1 {
+        font-family: var(--font-primary);
+        font-size: 4rem;
+        font-weight: 400;
+    }
 
-h2 {
-    font-family: var(--font-secondary);
-    font-size: 1rem; 
-    font-style: normal;
-    font-weight: 600;
-    color: var(--primary-color);
-}
+    h2 {
+        font-family: var(--font-secondary);
+        font-size: 1rem; 
+    }
 
-h3 {
-    font-family: var(--font-primary);
-    font-size: 1.8rem; 
-    font-style: normal;
-    font-weight: 400;
-    color: var(--primary-color);
-}
+    h3 {
+        font-family: var(--font-primary);
+        font-size: 1.8rem;
+        font-weight: 400;
+    }
 
-p {
-    font-family: var(--font-secondary);
-    font-size: 1rem;
-    font-style: normal;
-    color: var(--primary-color);
-}
+    p {
+        font-family: var(--font-secondary);
+        font-size: 1rem;
+    }
+/*-------------------------------------------------------- HEADER ----------------------------------------------------------*/
 
-/*--------------------------------------------------------HEADER----------------------------------------------------------*/
-header {
-    display: flex;
-    max-height: 6.9rem;
-    align-items: center;
-     z-index: 0;
-}
+    header {
+        display: flex;
+        max-height: 6.9rem;
+        align-items: center;
+    }
 
-header img {    
-    height: 17%;
-    width: 17%;
-    padding: 0.3rem;
-    margin: 0.6rem 0 1.25rem 0.6rem;
-    z-index: 0;
-}
+    header img {    
+        height: 17%;
+        width: 17%;
+        padding: 0.3rem;
+        margin: 0.6rem 0 1.25rem 0.6rem;
+    }
 
-/*---------------------------------------------LANDING SECTION (WESTE)------------------------------------------------------*/
+/*--------------------------------------------- LANDING SECTION (WESTE) ------------------------------------------------------*/
 
 .welcome {
-    /* Visible, centered welcome area */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -124,12 +114,12 @@ header img {
     margin: 1.25rem;
     min-height: 21rem; 
     transform: translateY(-15%);
-    z-index: 1;    /* give it room so the background svg is visible */
+    z-index: 1;
     position: relative;
 }
 
 .title {
-    z-index: 2;            /* sit above the background svg */
+    z-index: 2;
     position: relative;
     max-width: 100%;
     display: block;
@@ -138,17 +128,17 @@ header img {
 }
 
 .title h1 {
-    line-height: 1.0;      /* tighter line spacing */
+    line-height: 1.0;
 }
 
 .swimmwest img{
-  position: absolute;
-  transform: translate(-49%, -110%) scale(3);
-  opacity: 0.95;
-  z-index: 1;
+    position: absolute;
+    transform: translate(-49%, -110%) scale(3);
+    opacity: 0.95;
+    z-index: 1;
 }
 
-/* Tagline with waves left and right */
+/* ---Tagline/Slogan und Wellen-Icon--- */
 .tagline {
     display: flex;
     align-items: center;
@@ -174,22 +164,21 @@ header img {
 .map {
     max-height: 31.25rem;
 }
+
 .map h3 {
    margin-left: 0.94rem;
    margin-bottom: 0.63rem;
    padding: 0.32rem;
 }
 
-.map img {
-    display: block;            
-    object-fit: cover;         /* crop/zoom while preserving aspect */
-    object-position: center;   /* focus center (change to top/left as needed) */
-    transform: scale(1.09) translateY(-25%); /* tiny zoom + keep your vertical offset */
+.map img {         
+    object-fit: cover;        
+    object-position: center; 
+    transform: scale(1.09) translateY(-25%); /*Zoom und Verschiebung*/
     transform-origin: center center;
-    max-width: 100%;        /* prevents huge vertical overflow on small screens */
 }
 
-/*--------------------------------------------DIAGRAMM-------------------------------------------------------------------------*/
+/*-------------------------------------------- DIAGRAMM -------------------------------------------------------------------------*/
 
 .diagrammTitle h3 {
    margin-left: 0.94rem;
@@ -217,7 +206,7 @@ header img {
     position: absolute;
     top: 0.63rem;
     right: 0.63rem;
-    z-index: 100; /* Über den Wellen */
+    z-index: 100;
     background-color: var(--background-color);
     backdrop-filter: blur(0.25rem);
     padding: 0.38rem 0.75rem;
@@ -231,23 +220,23 @@ header img {
 }
 
 .chart-menu select {
-  font-size: 0.9rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.13rem;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.13rem;
 }
 
 .chart-menu label {
-  font-size: 0.8rem;
-  margin-right: 0.25rem;
+    font-size: 0.8rem;
+    margin-right: 0.25rem;
 }
 
 .chart-menu button {
-  font-size: 0.8rem;
-  padding: 0.19rem 0.38rem;
-  background-color: var(--tertiary-color);
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0.19rem 0.38rem;
+    background-color: var(--tertiary-color);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
 /*---Diagramm-Wellenstyling für Background---*/
@@ -271,7 +260,7 @@ header img {
     width: 100%;
     margin: 0 auto;
     padding: 1rem;
-    /* z-index: 1; */
+    z-index: 0;
 }
 
 .wave.desktop svg,
@@ -284,9 +273,11 @@ header img {
 .wave1 { 
     z-index: 1; top: 0; 
 }     /* hellste oben */
+
 .wave2 { 
     z-index: 2; top: 30%; 
 }   /* mittlere */
+
 .wave3 { 
     z-index: 3; top: 60%; 
 }   /* dunkelste unten */
@@ -300,7 +291,6 @@ canvas#diagramm {
     padding-bottom: 2.81rem;
     padding-right: 1.88rem;
 }
-
 
 /*----Pop-Up Styling----*/
 
@@ -376,7 +366,7 @@ canvas#diagramm {
     transform: scale(1.2);
 } 
 
-/*--------------------------------------------TRANSPARENZ-HINWEIS (Falls nötig)-----------------------------------------------*/
+/*--------------------------------------------TRANSPARENZ-HINWEIS -----------------------------------------------*/
 
 .transparenz {
     padding: 0.31rem 0.94rem 0.31rem 0.94rem;
@@ -385,7 +375,8 @@ canvas#diagramm {
 .transparenz p {
     font-size: 0.85rem;
 }
-/*--------------------------------------------JOURNI - TEXT ----------------------------------------------------------------*/
+
+/*-------------------------------------------- JOURNI - TEXT ----------------------------------------------------------------*/
 
 .flowText{
     margin-top: 1.25rem;
@@ -407,8 +398,7 @@ canvas#diagramm {
 }
 
 .paragraphs p {
-    margin-top: 0.63rem;
-    margin-bottom: 0.63rem;
+    margin: 0.63rem 0;
 }
 
 .paragraphs p a {
@@ -416,102 +406,83 @@ canvas#diagramm {
     text-decoration: underline;
 }
 
-/*--------------------------------------------FOOTER -----------------------------------------------------------------------*/
+/*-------------------------------------------------------- FOOTER -----------------------------------------------------------------------*/
 
-/* footer: image left (1/3) and paragraph right (2/3) — always side-by-side */
 footer {
-  /* full-bleed background */
-  background-color: var(--background-color);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  position: relative;
-  z-index: 1;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.75rem;
-
-  /* keep internal spacing */
-  padding: 1.25rem 0.63rem 1.56rem;  /* extra bottom padding replaces margin */
-  margin-bottom: 0;   
-
-  flex-wrap: nowrap;
-  overflow: hidden;
-  box-sizing: border-box;
-  border-top: 2px solid var(--primary-color);
+    /* full-bleed background */
+    background-color: var(--background-color);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    /* Abstände beibehalten */
+    flex-wrap: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-top: 2px solid var(--primary-color);
 }
 
 footer::before {
-  content: "";
-  position: absolute;
-  left: calc(33% + 0.5rem); /* horizontal position between img and text */
-  top: 5%;               /* start a bit from the top */
-  bottom: 5%;            /* end a bit above the bottom */
-  width: 0.13rem;
-  background: var(--primary-color);
-  border-radius: 0.13rem;
-  opacity: 1;
-  pointer-events: none;
-  z-index: 9999;
+    content: "";
+    position: absolute;
+    left: calc(33% + 0.5rem);
+    top: 5%;
+    bottom: 5%;            
+    width: 0.13rem;
+    background: var(--primary-color);
+    border-radius: 0.13rem;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 9999;
 }
 
-/* image: fixed 1/3 width */
 footer img {
-  flex: 0 0 33.3333%;
-  width: 33.3333%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  margin: 0;
+    flex: 0 0 33.3333%;
+    width: 33.3333%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    margin: 0;
 }
 
-/* paragraph: take remaining 2/3 */
 footer p {
-  flex: 1 1 66%;
-  width: 66%;
-  margin-left: 0.19rem;
-  margin-right: 0.19rem;
-  text-align: left;
-  font-size: 0.8rem;
-  overflow-wrap: break-word;
+    flex: 1 1 66%;
+    width: 66%;
+    margin-left: 0.19rem;
+    margin-right: 0.19rem;
+    text-align: left;
+    font-size: 0.8rem;
+    overflow-wrap: break-word;
 }
 
 footer p a {
-  color: var(--primary-color);
-  text-decoration: underline;
+    color: var(--primary-color);
+    text-decoration: underline;
 }
-/*------------------------MEDIA-QUERIES-----------------------------*/
 
-/* ----------------- Base (phone) (weil sonst nicht geht, lol----------------- */
+/*---------------------------------------------- MEDIA-QUERIES -------------------------------------------------------------------*/
+
+/* ----------------- Base (phone) ----------------- */
 @media (min-width:0px) {
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
         display: none; 
     }
     :root {
         --boat-size: 1;
-    };
+    }
 }
 
-/* ----------------------- In beetweeen size for responsiveness -------------------------------------------*/
+/* ----------------------- In between für Responsiveness ----------------------------------*/
 @media (min-width: 480px) and (max-width: 767.98px) {
-
-    h1 {
-        font-size: 4.3rem;
-    }
-
-    h2 {
-        font-size: 1.15rem;
-    }
-
-    h3 {
-        font-size: 2rem;
-    }
-
-    p {
-        font-size: 1.2rem;
-    }
+    h1 { font-size: 4.3rem; }
+    h2 { font-size: 1.15rem; }
+    h3 { font-size: 2rem; }
+    p  { font-size: 1.2rem; }
 
     header img {
         max-height: 5rem;
@@ -534,7 +505,7 @@ footer p a {
         z-index: 0;
         overflow: hidden;
         max-height: 40.63rem;
-        min-height: clamp(25rem, 50vw, 37.5rem); /* responsive but bounded */
+        min-height: clamp(25rem, 50vw, 37.5rem);
         margin-bottom: 0.63rem;
     }    
 
@@ -543,7 +514,7 @@ footer p a {
     }
     
     .map img {
-        width: clamp(100%, 90vw, 56.25rem);  /* grows smoothly until 900px */
+        width: clamp(100%, 90vw, 56.25rem);
         height: auto;
         object-fit: cover;
         object-position: center;
@@ -553,11 +524,10 @@ footer p a {
     }
 
     .diagrammTitle h3 {
-        margin-top: 0.75rem;             /* override the -60px from base */
+        margin-top: 0.75rem;
         margin-left: 1.88rem;
     }
 
-    /* push the chart down a touch more, and make sure it starts on a new line */
     .diagramm {
         margin-top: 1rem;
         clear: both;
@@ -580,31 +550,15 @@ footer p a {
 
     footer p {
         font-size: 1rem;
-    }
-
+    } 
 }
 
-
 /* ----------------- Tablet (≥ 768px) ----------------- */
-
 @media (min-width: 768px) {
-    
-    /* Schriftgrössen */
-    h1 { 
-        font-size: 4.6rem;
-    }     
-
-    h2 { 
-        font-size: 1.6rem; 
-    }
-    
-    h3 { 
-        font-size: 2.5rem; 
-    }   
-
-    p  { 
-        font-size: 1.3rem; 
-    }
+    h1 { font-size: 4.6rem; }     
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 2.5rem; }   
+    p  { font-size: 1.3rem; }
 
     header img {
         max-height: 5.63rem;
@@ -615,19 +569,14 @@ footer p a {
     }
 
     .welcome {
-        flex-direction: row; 
-        align-items: center;    
-    }
-
-    .welcome {
         display: flex;
+        flex-direction: row;
         justify-content: space-between; 
         align-items: center;
-        max-width: 100%;   
-        height: 100%;                
-        margin: 0 1.25rem;                 
-        max-width: 75rem;              
-    } 
+        height: 100%;
+        margin: 0 1.25rem;
+        max-width: 75rem;
+    }
 
     .welcome .swimmwest {
         margin-left: 3.13rem;
@@ -643,17 +592,17 @@ footer p a {
 
     .welcome .title {
         position: absolute;
-        top: 84%;       /* same vertical alignment as the vest */
-        left: 19%;      /* same horizontal reference as the vest */
-        transform: translate(-50%, -120%); /* fine-tune placement */
-        z-index: 2;     /* make sure it sits above the image */
+        top: 84%;
+        left: 19%;
+        transform: translate(-50%, -120%);
+        z-index: 2;
     }
 
     .welcome .tagline {
-        position: relative; /* make sure it’s not affected by absolute stacking */
-        margin-top:  3.75rem;  /* push it below the image/title stack */
+        position: relative;
+        margin-top:  3.75rem;
         margin-left: 12.5rem;
-        text-align: center; /* or adjust as needed */
+        text-align: center;
     }
 
     .tagline img {
@@ -666,9 +615,9 @@ footer p a {
     .map {
         position: relative;
         z-index: 0;
-        max-width: 62.5rem;       /* keep it centered, not full-bleed */
-        margin: 3.13rem auto 1.88rem;  /* ⬅️ this line adds top spacing */
-        min-height: clamp(28.13rem, 55vw, 43.75rem); /* scales smoothly with viewport */
+        max-width: 62.5rem;
+        margin: 3.13rem auto 1.88rem;
+        min-height: clamp(28.13rem, 55vw, 43.75rem);
         border-radius: 0.5rem;
         padding: 0.63rem;
     }
@@ -690,7 +639,7 @@ footer p a {
     }
 
      .diagrammTitle h3 {
-        margin-top: 18.13rem;   /* push the title down a bit more */
+        margin-top: 18.13rem;
         margin-left: 1.88rem;
     }
 
@@ -715,67 +664,56 @@ footer p a {
     }
 
     footer img {
-        flex: 0 0 auto;          /* keep natural sizing */
-        width: 12.5rem;            /* smaller fixed width */
+        flex: 0 0 auto;
+        width: 12.5rem;
         max-width: 12.5rem;
         height: auto;
         object-fit: contain;
     }
 
-    /* slightly larger paragraph text */
     footer p {
         flex: 1 1 auto;
-        font-size: 1.175rem;      /* just a bit bigger than mobile (0.8rem) */
+        font-size: 1.175rem;
         line-height: 1.45;
-        width: auto;             /* let it flow naturally next to image */
+        width: auto;
         padding-left: 0.63rem;
     }
 
-    /* adjust divider to align with new image width */
+    /* Verschiebung der Aufteilung im Footer für neue Grösse */
     footer::before {
-     left: calc(12.50rem + 0.63rem); /* image width + small gap */
+        left: calc(12.50rem + 0.63rem);
     }
 
     :root {
         --boat-size: 30; /*Grösse für Tablet*/
-    };
+    }
+
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop { 
         display: none; 
     }
-
 }
 
 /* ----------------- Small desktop (≥ 1024px) ----------------- */
 @media (min-width: 1024px) {
-    h1 {
-        font-size: 4.8rem;
-    }
-    h2 {
-        font-size: 1.75rem; /* ~28px */
-    }
-    h3 {
-        font-size: 2.6rem; /* ~22px */
-    }
-    p {
-        font-size: 1.35rem; /* ~18px */
-    }
+    h1 { font-size: 4.8rem; }
+    h2 { font-size: 1.75rem;}
+    h3 { font-size: 2.6rem; }
+    p  { font-size: 1.35rem; }
 
     header img {
-    max-height: 5.63rem;
-    max-width: 5.63rem;
-    padding: 0.31rem;
-    margin: 0.63rem 0 1.25rem 0.63rem;
-    z-index: 0;
+        max-height: 5.63rem;
+        max-width: 5.63rem;
+        padding: 0.31rem;
+        margin: 0.63rem 0 1.25rem 0.63rem;
+        z-index: 0;
     }
     
-    /* Hero-Bereich (Welcome) zentrieren und etwas „luftiger“ machen */
     .welcome {
         max-width: 75rem;
         margin: 1.25rem auto 0;
         transform: translateY(-12%);
     }
 
-    /* Weste etwas grösser und harmonisch positioniert */
     .welcome .swimmwest img {
         max-width:  16.25rem;
         max-height: 20rem;
@@ -785,7 +723,6 @@ footer p a {
         opacity: 0.95;
     }
 
-    /* Titel bleibt über der Weste, leicht nach oben gezogen */
     .welcome .title {
         position: absolute;
         top: 80%;
@@ -795,7 +732,6 @@ footer p a {
         text-align: center;
     }
 
-    /* Tagline weiter nach rechts, damit sie nicht in die Weste läuft */
     .welcome .tagline {
         position: relative;
         margin-top: 4.38rem;
@@ -813,6 +749,7 @@ footer p a {
     :root {
         --boat-size: 40; /*Grösse für Desktop klein*/
     }
+
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop {
         display: block;
     }
@@ -830,13 +767,11 @@ footer p a {
 
 /* ----------------- Large desktop (≥ 1440px) ----------------- */
 @media (min-width: 1440px) {
-     /* Schriftgrössen */
     h1 { font-size: 5rem; }
     h2 { font-size: 1.9rem; }
     h3 { font-size: 2.7rem; }
     p  { font-size: 1.4rem; }
 
-    /* Header */
     header img {
         max-height: 5.94rem;
         max-width: 5.94rem;
@@ -851,44 +786,36 @@ footer p a {
         transform: translate(-50%, -150%);
     }
 
-   /* Tagline-Block für sehr grosse Screens */
     .welcome .tagline {
         position: relative;
         margin-top: 4.38rem;
-        margin-left: 16.25rem;   /* weiter links als vorher (260px) */
+        margin-left: 16.25rem; 
         text-align: left;
     }
 
     .welcome .tagline img {
-        width: 12.5rem;         /* fix groesser als bei 1024px */
+        width: 12.5rem;
         display: block;
     }
 
     :root {
         --boat-size: 50; /*Grösse für Desktop gross*/
     }
+
     #waveDarkDesktop, #waveMediumDesktop, #waveBrightDesktop {
         display: block;
     }
+
     #waveDarkMobile, #waveMediumMobile, #waveBrightMobile { 
         display: none; 
     }
 
-    /* Breite Inhalte zentrieren (wie bei kleineren Breakpoints) */
-    .map {
-        max-width: 112.5rem;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Map leicht grösser, aber kontrolliert */
     .map {
         max-width: 75rem;
         min-height: clamp(31.25rem, 45vw, 46.88rem);
         margin: 3.75rem auto 2.5rem;
     }
 
-    /* Diagrammtitel etwas nach unten ziehen */
     .diagrammTitle h3 {
         margin-top: 16.25rem;
     }
