@@ -1,3 +1,8 @@
+let latestPerCityGlobal = {};  
+let todayDataGlobal = [];
+
+// Diagramm Script
+
 document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'unload.php'; // Pfad zu deinem PHP-Skript
 
@@ -27,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Nur heutige Messungen
             const todayData = data.filter(item => item.Timestamp.split(' ')[0] === today);
+            todayDataGlobal = todayData;
             console.log("Heutige Daten:", todayData);
 
             // Letzter Messwert pro Stadt
@@ -37,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             console.log("Letzte Messwerte pro Stadt:", latestPerCity);
+
+            latestPerCityGlobal = latestPerCity;
 
             let sortedCityNames = [];
             let sortedFlowValues = [];
@@ -152,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         },
                         legend: {
-                            display: false // optional: Legende ausblenden
+                            display: false // Legende ausblenden
                         }
                     }
                 }
@@ -189,7 +197,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     const label = chartInstance.data.labels[dataIndex];
                     const value = chartInstance.data.datasets[datasetIndex].data[dataIndex];
 
-                    console.log('Klick auf Stadt: ${label}, Strömung: ${value}');
+                    const cityLabel = chartInstance.data.labels[dataIndex].toLowerCase();
+                    const cityData = latestPerCityGlobal[cityLabel];
+                    if (!cityData) return;
+
+                    console.log(`Klick auf Stadt: ${label}, Strömung: ${value}`);
+
+                    //Durchschnittswerte berechnen
+                    const avgFlow = (() => {
+                        const entries = todayDataGlobal.filter(
+                            d => d.location_id === cityLabel
+                        );
+                        const sum = entries.reduce(
+                            (acc, d) => acc + parseFloat(d.flow), 0
+                        );
+                        return entries.length ? Math.round(sum / entries.length) : '-';
+                    })();
 
                     // Popup Position
                     const CanvasRect = chartElement.getBoundingClientRect();
@@ -201,6 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const popup = document.getElementById('popup-content');
                     const popupCity = document.getElementById('popup-city');
                     const popupFlow = document.getElementById('popup-flow');
+
+                    popupFlow.textContent = cityData.flow;  
+                    document.getElementById('popup-flow-text').textContent = cityData.flow_text;
+                    document.getElementById('popup-air').textContent = cityData.tt_Luft;
+                    document.getElementById('popup-water').textContent = cityData.Temp_H20;
+                    document.getElementById('popup-water-text').textContent = cityData.temp_text;
+                    document.getElementById('popup-average').textContent = avgFlow;
 
                     if (overlay && popup && popupCity && popupFlow) {
                         popupCity.textContent = label;
