@@ -359,6 +359,11 @@ canvas#diagramm {
     color: #121726;
 }
 
+#popup-water-text, #popup-flow-text {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+}
+
 .popup-close {
     position: absolute;
     top: 0.8rem;
