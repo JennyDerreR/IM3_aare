@@ -283,7 +283,7 @@ body {
 }   /* dunkelste unten */
 
 canvas#diagramm {
-    position: relative;
+    position: absolute;
     z-index: 10; /* Über den Wellen */
     width: 100% !important;
     height: auto !important;
